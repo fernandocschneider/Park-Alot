@@ -4,16 +4,16 @@ CREATE TABLE Cliente (
   client_phone  int4 NOT NULL, 
   client_mail varchar(30), 
   client_age int4 NOT NULL, 
-  client_sex  char(1) CHECK(clie_sexo in ('M' , 'F')), 
+  client_sex  char(1) CHECK(client_sex in ('M' , 'F')), 
   PRIMARY KEY (client_cpf));
 
 COMMENT ON TABLE Cliente IS 'Tabela de Gerenciamento de Clientes';
 COMMENT ON COLUMN Cliente.client_cpf IS 'Cpf do Cliente';
 COMMENT ON COLUMN Cliente.client_name IS 'Nome do Cliente';
-COMMENT ON COLUMN Cliente.clie_tele IS 'Número de telefone do cliente';
+COMMENT ON COLUMN Cliente.client_phone IS 'Número de telefone do cliente';
 COMMENT ON COLUMN Cliente.client_mail IS 'Email do Cliente';
 COMMENT ON COLUMN Cliente.client_age IS 'Idade do Cliente';
-COMMENT ON COLUMN Cliente.clie_sexo IS 'Sexo do Cliente
+COMMENT ON COLUMN Cliente.client_sex IS 'Sexo do Cliente
 
 M - Masculino
 F - Feminino';
@@ -102,7 +102,7 @@ COMMENT ON COLUMN Vaga.spot_local IS 'Localização das vagas';
 CREATE TABLE Reserva (
   booking_id       SERIAL NOT NULL, 
   booking_initial_date date NOT NULL, 
-  booking final_datew date NOT NULL, 
+  booking_final_date date NOT NULL, 
   booking_status     varchar(20) NOT NULL, 
   spot_code       int4 NOT NULL, 
   veicule_sign     varchar(8) NOT NULL, 
