@@ -1,4 +1,5 @@
 CREATE TABLE Cliente (
+  client_id SERIAL NOT NULL,
   client_cpf   varchar(11) NOT NULL, 
   client_name  varchar(40) NOT NULL, 
   client_phone  int4 NOT NULL, 
@@ -19,6 +20,7 @@ M - Masculino
 F - Feminino';
 
 CREATE TABLE Funcionario (
+  worker_id SERIAL NOT NULL,
   worker_cpf      varchar(11) NOT NULL, 
   worker_name     varchar(40) NOT NULL, 
   worker_phone     int4 NOT NULL, 

@@ -1,4 +1,7 @@
-# :red_car: Park'Alot 
+<p align="center">
+  <img width="350" height="350" alt="ParkAlotLogo" src="LOGONUA.png">
+</p>
+
 
 ## Park'Alot é um sistema de gerenciamento e aluguel de vagas de estacionamento desenvolvido para grandes centros onde a demanda por vagas de estacionamento é muito alta. Nele você faz o seu cadastro e do seu veículo, informa o período que deseja reservar a vaga, faz o pagamento e estaciona o seu carro sem preocupações. 
 
