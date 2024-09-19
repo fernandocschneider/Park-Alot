@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="350" height="350" alt="ParkAlotLogo" src="LOGONUA.png">
+  <img width="350" height="150" alt="ParkAlotLogo" src="LOGOCERTA.png">
 </p>
 
 
