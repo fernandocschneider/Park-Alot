@@ -3,28 +3,51 @@
 </p>
 
 
-## Park'Alot é um sistema de gerenciamento e aluguel de vagas de estacionamento desenvolvido para grandes centros onde a demanda por vagas de estacionamento é muito alta. Nele você faz o seu cadastro e do seu veículo, informa o período que deseja reservar a vaga, faz o pagamento e estaciona o seu carro sem preocupações. 
+<h2>O Park'alot é um sistema revolucionário de gerenciamento de estacionamento que torna a administração de vagas mais simples e eficiente, além de ser acessível financeiramente. Tradicionalmente, o gerenciamento de estacionamentos exige a instalação de tecnologias complexas e dispendiosas, que geralmente envolvem equipamentos avançados e a contratação de especialistas em TI. Porém, com o Park'alot, tudo o que você precisa é de um smartphone e um administrador, eliminando a necessidade de grandes investimentos em infraestrutura ou suporte técnico especializado.</h2>
 
-### Para quem indicamos:
- :briefcase: Pessoas que trabalham em empresas que não possuem estacionamento próximo: Park'Alot oferece uma solução prática para quem precisa estacionar com segurança e comodidade perto do local de trabalho.
+<p>Seja em grandes empresas, pequenas e médias organizações, ou até mesmo em condomínios residenciais e universidades, o Park'alot oferece uma solução prática e econômica para os desafios do dia a dia na gestão de vagas. Com frequência, as empresas enfrentam dificuldades como a falta de vagas suficientes para acomodar todos os veículos de seus funcionários. No entanto, devido ao alto custo dos sistemas tradicionais de gerenciamento, esses problemas costumam ser negligenciados. O Park'alot transforma essa realidade, oferecendo uma solução eficiente e acessível. </p>
+
+<h3>Para quem indicamos:</h3>
  
- :credit_card: Pessoas que querem fazer compras em lojas próximas ao nosso estacionamento: muitas de uma experiência de compras sem se preocupar com a disponibilidade de vagas de estacionamento.
- 
- :airplane: Pessoas que estão viajando e viajando deixam o carro em um local seguro: Park'Alot garante que seu veículo estará bem cuidado enquanto você viaja, oferecendo um ambiente seguro e monitorado.
+<h4>
+  
+  🏫Universidades;
 
-### Benefícios:
-:heavy_check_mark: Cadastro e Reserva de Vagas;
+  🏘️ Condomínios residenciais;
 
-:heavy_check_mark: Pagamento Integrado;
+  🏢 Empresas;
 
-:heavy_check_mark: Segurança e Conveniência;
+  🛒 Shopping centers;
 
-:heavy_check_mark: Suporte ao Cliente;
+  🏟️ Estadios e arenas esportivos;
+  
+  🏥 Hospitais;
+  
+  ✈️ Aeroportos;</h4>
 
-:heavy_check_mark: Acessibilidade.
 
-### :dart: Nosso Objetivo
 
-Park'Alot foi criado com o objetivo de revolucionar o setor de estacionamento, oferecendo uma solução prática e moderna para os problemas de mobilidade urbana. Nossa missão é proporcionar segurança e conveniência aos nossos clientes, tornando o estacionamento uma experiência sem estresse.
+<h3>Benefícios:</h3>
 
-Com Park'Alot, você economiza tempo e evita o estresse de procurar vagas de estacionamento, permitindo que você se concentre em suas atividades com a certeza de que seu veículo está seguro.
+✔️ Custo reduzido;
+
+✔️ Simplicidade;
+
+✔️ Eficiência;
+
+✔️ Conflitos minimizados;
+
+✔️ Solução acessível;
+
+✔️ Segurança e Conveniência;
+
+✔️ Suporte ao Cliente;
+
+
+<h2> 🎯 Nosso Objetivo</h2>
+
+Park'Alot foi criado com o objetivo de revolucionar o setor de estacionamento, oferecendo uma solução prática e moderna para os problemas de mobilidade urbana. 
+<br>Nossa missão é proporcionar segurança e conveniência aos nossos clientes, tornando o estacionamento uma experiência sem estresse.
+
+
+<h4>Park'alot: Estacionamento eficiente, tecnologia descomplicada.</h4>
