@@ -1,9 +1,9 @@
 CREATE TABLE Cliente (
-  client_id SERIAL NOT NULL,
+  client_id serial not null,
   client_cpf   varchar(11) NOT NULL, 
   client_name  varchar(40) NOT NULL, 
   client_phone  int4 NOT NULL, 
-  client_mail varchar(30), 
+  client_mail varchar(30)not NULL, 
   client_age int4 NOT NULL, 
   client_sex  char(1) CHECK(client_sex in ('M' , 'F')), 
   PRIMARY KEY (client_cpf));
@@ -20,11 +20,11 @@ M - Masculino
 F - Feminino';
 
 CREATE TABLE Funcionario (
-  worker_id SERIAL NOT NULL,
+  worker_id serial not null,
   worker_cpf      varchar(11) NOT NULL, 
   worker_name     varchar(40) NOT NULL, 
   worker_phone     int4 NOT NULL, 
-  worker_mail    varchar(30), 
+  worker_mail    varchar(30) not NULL, 
   worker_role    varchar(30) NOT NULL, 
   worker_salary    numeric(10, 2) NOT NULL, 
   worker_admission date NOT NULL, 
@@ -89,7 +89,7 @@ CREATE TABLE Vaga (
   spot_code    SERIAL NOT NULL, 
   spot_available char(1) NOT NULL CHECK(spot_available in ('D' , 'I')), 
   spot_time   time(7) NOT NULL, 
-  spot_local  varchar(50), 
+  spot_local  varchar(50) not null, 
   fix_id    int4 NOT NULL, 
   PRIMARY KEY (spot_code));
 
@@ -113,7 +113,7 @@ CREATE TABLE Reserva (
 COMMENT ON TABLE Reserva IS 'Tabela de gerenciamento de reserva';
 COMMENT ON COLUMN Reserva.booking_id IS 'Id da reserva de vaga';
 COMMENT ON COLUMN Reserva.booking_initial_date IS 'Inicio da data da reserva';
-COMMENT ON COLUMN Reserva.booking final_datew IS 'Data de encerramento da reserva da vaga';
+COMMENT ON COLUMN Reserva.booking_final_date IS 'Data de encerramento da reserva da vaga';
 COMMENT ON COLUMN Reserva.booking_status IS 'Status da reserva';
 
 CREATE TABLE Pagamento (
@@ -142,6 +142,8 @@ COMMENT ON TABLE Historico_utilizacao IS 'Tabela de gerenciamento do histórico 
 COMMENT ON COLUMN Historico_utilizacao.history_id IS 'Id do histórico';
 COMMENT ON COLUMN Historico_utilizacao.history_entry_date IS 'Histórico de entradas da vaga';
 COMMENT ON COLUMN Historico_utilizacao.history_leave_date IS 'HIstórico de saida da vaga';
+
+alter table Funcionario add column worker_id SERIAL not null;
 
 ALTER TABLE Veiculo ADD CONSTRAINT FKVeiculo652748 FOREIGN KEY (client_cpf) REFERENCES Cliente (client_cpf);
 ALTER TABLE Reserva ADD CONSTRAINT FKReserva520514 FOREIGN KEY (spot_code) REFERENCES Vaga (spot_code);
