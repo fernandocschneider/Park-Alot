@@ -1,11 +1,11 @@
 CREATE TABLE Cliente (
   client_id serial not null,
-  client_cpf   varchar(11) NOT NULL, 
-  client_name  varchar(40) NOT NULL, 
-  client_phone  varchar(11) NOT NULL, 
+  client_cpf varchar(11) NOT NULL, 
+  client_name varchar(40) NOT NULL, 
+  client_phone varchar(11) NOT NULL,
   client_mail varchar(30) NOT NULL, 
   client_age int4 NOT NULL, 
-  client_sex  char(1) CHECK(client_sex in ('M' , 'F')), 
+  client_sex  char(1) CHECK(client_sex in ('M' , 'F') NOT NULL), 
   PRIMARY KEY (client_id));
 
 COMMENT ON TABLE Cliente IS 'Tabela de Gerenciamento de Clientes';
