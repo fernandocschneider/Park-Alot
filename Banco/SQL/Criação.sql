@@ -6,9 +6,10 @@ CREATE TABLE Cliente (
   client_mail varchar(30)not NULL, 
   client_age int4 NOT NULL, 
   client_sex  char(1) CHECK(client_sex in ('M' , 'F')), 
-  PRIMARY KEY (client_cpf));
+  PRIMARY KEY (client_id));
 
 COMMENT ON TABLE Cliente IS 'Tabela de Gerenciamento de Clientes';
+COMMENT ON TABLE Cliente.client_id IS 'Identificador único do cliente';
 COMMENT ON COLUMN Cliente.client_cpf IS 'Cpf do Cliente';
 COMMENT ON COLUMN Cliente.client_name IS 'Nome do Cliente';
 COMMENT ON COLUMN Cliente.client_phone IS 'Número de telefone do cliente';
@@ -28,9 +29,10 @@ CREATE TABLE Funcionario (
   worker_role    varchar(30) NOT NULL, 
   worker_salary    numeric(10, 2) NOT NULL, 
   worker_admission date NOT NULL, 
-  PRIMARY KEY (worker_cpf));
+  PRIMARY KEY (worker_id));
 
 COMMENT ON TABLE Funcionario IS 'Tabela de gerenciamento de funcionários';
+COMMENT ON TABLE Funcionario.worker_id IS 'Identificador único do funcionario';
 COMMENT ON COLUMN Funcionario.worker_cpf IS 'Cpf do funcionário';
 COMMENT ON COLUMN Funcionario.worker_name IS 'Nome do funcionário';
 COMMENT ON COLUMN Funcionario.worker_phone IS 'Telefone do funcionário';
@@ -80,21 +82,22 @@ CREATE TABLE Manutencao (
   PRIMARY KEY (fix_id));
 
 COMMENT ON TABLE Manutencao IS 'Tabela de gerenciamento da manutenção';
+COMMENT ON TABLE Manutencao.fix_id IS 'Identificador único da manutenção';
 COMMENT ON COLUMN Manutencao.fix_id IS 'Id da manutenção da vaga';
 COMMENT ON COLUMN Manutencao.fix_description IS 'Descrição da manutenção da vaga';
 COMMENT ON COLUMN Manutencao.fix_date IS 'Data da manutenção';
 COMMENT ON COLUMN Manutencao.fix_cost IS 'Custo da manutenção da vaga';
 
 CREATE TABLE Vaga (
-  spot_code    SERIAL NOT NULL, 
+  spot_id    SERIAL NOT NULL, 
   spot_available char(1) NOT NULL CHECK(spot_available in ('D' , 'I')), 
   spot_time   time(7) NOT NULL, 
   spot_local  varchar(50) not null, 
   fix_id    int4 NOT NULL, 
-  PRIMARY KEY (spot_code));
+  PRIMARY KEY (spot_id));
 
 COMMENT ON TABLE Vaga IS 'Tabela de Gereciamento das vagas';
-COMMENT ON COLUMN Vaga.spot_code IS 'Código da vaga';
+COMMENT ON COLUMN Vaga.spot_id IS 'Identificador único da vaga';
 COMMENT ON COLUMN Vaga.spot_available IS 'Disponibilidade da vaga
 D - Disponivel
 I - Indisponível';
@@ -111,7 +114,7 @@ CREATE TABLE Reserva (
   PRIMARY KEY (booking_id));
 
 COMMENT ON TABLE Reserva IS 'Tabela de gerenciamento de reserva';
-COMMENT ON COLUMN Reserva.booking_id IS 'Id da reserva de vaga';
+COMMENT ON COLUMN Reserva.booking_id IS 'Identificador único da reserva de vaga';
 COMMENT ON COLUMN Reserva.booking_initial_date IS 'Inicio da data da reserva';
 COMMENT ON COLUMN Reserva.booking_final_date IS 'Data de encerramento da reserva da vaga';
 COMMENT ON COLUMN Reserva.booking_status IS 'Status da reserva';
@@ -125,7 +128,7 @@ CREATE TABLE Pagamento (
   PRIMARY KEY (payment_id));
 
 COMMENT ON TABLE Pagamento IS 'Tabela de gerenciamento de pagamento';
-COMMENT ON COLUMN Pagamento.payment_id IS 'Id de pagamento da vaga';
+COMMENT ON COLUMN Pagamento.payment_id IS 'Identificador único do pagamento da vaga';
 COMMENT ON COLUMN Pagamento.payment_cost IS 'Valor do pagamento da vaga';
 COMMENT ON COLUMN Pagamento.payment_date IS 'Data de pagamento';
 COMMENT ON COLUMN Pagamento.payment_method IS 'Método de pagamento';
@@ -139,18 +142,18 @@ CREATE TABLE Historico_utilizacao (
   PRIMARY KEY (history_id));
 
 COMMENT ON TABLE Historico_utilizacao IS 'Tabela de gerenciamento do histórico de utilização';
-COMMENT ON COLUMN Historico_utilizacao.history_id IS 'Id do histórico';
+COMMENT ON COLUMN Historico_utilizacao.history_id IS 'Identificador único do histórico';
 COMMENT ON COLUMN Historico_utilizacao.history_entry_date IS 'Histórico de entradas da vaga';
 COMMENT ON COLUMN Historico_utilizacao.history_leave_date IS 'HIstórico de saida da vaga';
 
 alter table Funcionario add column worker_id SERIAL not null;
 
-ALTER TABLE Veiculo ADD CONSTRAINT FKVeiculo652748 FOREIGN KEY (client_cpf) REFERENCES Cliente (client_cpf);
-ALTER TABLE Reserva ADD CONSTRAINT FKReserva520514 FOREIGN KEY (spot_code) REFERENCES Vaga (spot_code);
+ALTER TABLE Veiculo ADD CONSTRAINT FKVeiculo652748 FOREIGN KEY (client_id) REFERENCES Cliente (client_id);
+ALTER TABLE Reserva ADD CONSTRAINT FKReserva520514 FOREIGN KEY (spot_id) REFERENCES Vaga (spot_id);
 ALTER TABLE Reserva ADD CONSTRAINT FKReserva762773 FOREIGN KEY (veicule_sign) REFERENCES Veiculo (veicule_sign);
 ALTER TABLE Pagamento ADD CONSTRAINT FKPagamento765087 FOREIGN KEY (booking_id) REFERENCES Reserva (booking_id);
-ALTER TABLE Manutencao ADD CONSTRAINT FKManutencao178953 FOREIGN KEY (worker_cpf) REFERENCES Funcionario (worker_cpf);
-ALTER TABLE Historico_utilizacao ADD CONSTRAINT FKHistorico_553925 FOREIGN KEY (spot_code) REFERENCES Vaga (spot_code);
+ALTER TABLE Manutencao ADD CONSTRAINT FKManutencao178953 FOREIGN KEY (worker_id) REFERENCES Funcionario (worker_id);
+ALTER TABLE Historico_utilizacao ADD CONSTRAINT FKHistorico_553925 FOREIGN KEY (spot_id) REFERENCES Vaga (spot_id);
 ALTER TABLE Historico_utilizacao ADD CONSTRAINT FKHistorico_311666 FOREIGN KEY (veicule_sign) REFERENCES Veiculo (veicule_sign);
-ALTER TABLE Endereco ADD CONSTRAINT FKEndereco841202 FOREIGN KEY (client_cpf) REFERENCES Cliente (client_cpf);
+ALTER TABLE Endereco ADD CONSTRAINT FKEndereco841202 FOREIGN KEY (client_id) REFERENCES Cliente (client_id);
 ALTER TABLE Vaga ADD CONSTRAINT FKVaga791300 FOREIGN KEY (fix_id) REFERENCES Manutencao (fix_id);
