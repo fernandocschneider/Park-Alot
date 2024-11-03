@@ -1,27 +1,21 @@
-//Rever
-/*
 function verificarCPF(client_cpf) {
-    console.log(client_cpf);
     return $.ajax({
         method: "GET",
         url: "verificarCPF",
-        data: { cpf: client_cpf },
-        contentType: "application/json; charset=utf-8"
+        data: { cpf: client_cpf }
     });
 }
 
 function verificarEmail(client_mail) {
-    console.log(client_mail);
     return $.ajax({
         method: "GET",
         url: "verificarEmail",
-        data: { email: client_mail },
-        contentType: "application/json; charset=utf-8"
+        data: { email: client_mail }
     });
 }
-    */
 
 function salvarUsuario() {
+
     var client_name = $("#nome").val();
     var client_cpf = $("#cpf").val();
     var client_mail = $("#email").val();
@@ -78,47 +72,40 @@ function salvarUsuario() {
         return;
     }
 
-    //Verificação não funcionando, rever
-        /*
-        // Verificações antes de salvar
-        Promise.all([
-            verificarCPF(client_cpf),
+    verificarCPF(client_cpf)
+    .then(function (exists) {
+        if (exists) {
+            alert("CPF já cadastrado");
+            return false;
+        } else {
             verificarEmail(client_mail)
-        ]).then(function (responses) {
-            const cpfResponse = responses[0];
-            const emailResponse = responses[1];
-    
-            // Se o CPF já está cadastrado
-            if (cpfResponse || cpfResponse.status === 200) {
-                alert("CPF já cadastrado");
-                return; // Para a execução aqui
-            }
-    
-            // Se o e-mail já está cadastrado
-            if (emailResponse || emailResponse.status === 200) {
-                alert("E-mail já cadastrado");
-                return; // Para a execução aqui
-            }
-            */
-
-            return $.ajax({
-                method: "POST",
-                url: "salvar",
-                data :JSON.stringify({
-                    name : client_name,
-                    cpf : client_cpf,
-                    email : client_mail,
-                    phone : client_phone,
-                    age : idade,
-                    sex : client_sex
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    $("#id").val(response.id);
-                    alert("Cadastro realizado com sucesso");
+            .then(function (exists) {
+                if (exists) {
+                    alert("E-mail já cadastrado");
+                    return false;
+                } else {
+                    return $.ajax({
+                        method: "POST",
+                        url: "salvar",
+                        data: JSON.stringify({
+                            name: client_name,
+                            cpf: client_cpf,
+                            email: client_mail,
+                            phone: client_phone,
+                            age: idade,
+                            sex: client_sex
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (response) {
+                            $("#id").val(response.id);
+                            alert("Cadastro realizado com sucesso");
+                        }
+                    }).fail(function (xhr, status, error) {
+                        console.error("Erro ao realizar o cadastro:", status, error, xhr.responseText);
+                        alert("Erro ao realizar o cadastro: " + xhr.responseText + "\nStatus: " + status + "\nErro: " + error);
+                    })
                 }
-            }).fail(function (xhr, status, error) {
-                console.error("Erro ao realizar o cadastro:", status, error, xhr.responseText);
-                alert("Erro ao realizar o cadastro: " + xhr.responseText + "\nStatus: " + status + "\nErro: " + error);
             })
         }
+    })
+}

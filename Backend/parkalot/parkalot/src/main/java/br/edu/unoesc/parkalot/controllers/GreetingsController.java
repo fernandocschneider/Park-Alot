@@ -67,13 +67,6 @@ public class GreetingsController {
         return new ResponseEntity<Cliente>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "buscarcliente")
-    @ResponseBody
-    public ResponseEntity<Cliente> buscarcliente(@RequestParam(name= "idclient") Long idclient) {
-        Cliente cliente = clienteRepository.findById(idclient).get();
-        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
-    }
-
     @PutMapping(value = "atualizar")
     @ResponseBody
     public ResponseEntity<?> atualizar(@RequestBody Cliente cliente) {
@@ -88,13 +81,19 @@ public class GreetingsController {
     @ResponseBody
     public ResponseEntity<Boolean> verificarCPF(@RequestParam(name = "cpf") String cpf) {
         Cliente cliente = clienteRepository.findByCpf(cpf);
-        return ResponseEntity.ok(cliente != null);
+        if (cliente == null) {
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+        }
+        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
     @GetMapping(value = "verificarEmail")
-    @ResponseBody 
+    @ResponseBody
     public ResponseEntity<Boolean> verificarEmail(@RequestParam(name = "email") String email) {
         Cliente cliente = clienteRepository.findByEmail(email);
-        return ResponseEntity.ok(cliente != null);
+        if (cliente == null) {
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+        }
+        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 }
