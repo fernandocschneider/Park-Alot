@@ -28,7 +28,7 @@ CREATE TABLE Funcionario (
   worker_mail    varchar(30) not NULL, 
   worker_role    varchar(30) NOT NULL, 
   worker_salary    numeric(10, 2) NOT NULL, 
-  worker_admission date NOT NULL, 
+  worker_admission int4 NOT NULL, 
   PRIMARY KEY (worker_id));
 
 COMMENT ON TABLE Funcionario IS 'Tabela de gerenciamento de funcionários';

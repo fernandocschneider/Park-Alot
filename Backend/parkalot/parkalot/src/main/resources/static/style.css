@@ -1,0 +1,68 @@
+body {
+    background-color: #B7D2F8; /* Cor de fundo leve */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    display: flex; /* Usar flexbox para centralizar */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Altura total da janela */
+    margin: 0; /* Remove margens padrão */
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+form {
+    width: 500px;
+    background-color: #3675FE; /* Cor de fundo do formulário */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 30px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+div {
+    margin-bottom: 15px; /* Espaçamento entre os campos */
+}
+
+label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex; /* Para ocupar toda a largura */
+    margin-bottom: 100px; /* Espaçamento abaixo do rótulo */
+    font-weight: bold; /* Rótulo em negrito */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 411px; /* Largura total do campo */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda cinza clara */
+    border-radius: 100px; /* Bordas arredondadas */
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+}
+
+button {
+    margin: auto;
+    display: block;
+    background-color: #2967ED; /* Cor do botão */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Remove borda padrão */
+    padding: 10px 15px; /* Espaçamento interno do botão */
+    border-radius: 100px; /* Bordas arredondadas do botão */
+    cursor: pointer; /* Cursor em forma de ponteiro ao passar o mouse */
+}
+
+button:hover {
+    background-color: #0056b3; /* Cor mais escura ao passar o mouse */
+}

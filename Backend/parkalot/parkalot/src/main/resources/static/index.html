@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PARK'ALOT - Cadastro</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <form action="" id="formCadastroCliente">
+        <h2>Cadastre-se</h2>
+        <div>
+            <input type="text" id="nome" placeholder="Informe o nome" required="required">
+        </div>
+        <div>
+            <input type="text" id="cpf" placeholder="Informe o CPF" required="required">
+        </div>
+        <div>
+            <input type="email" id="email" placeholder="Informe o email" required="required">
+        </div>
+        <div>
+            <input type="tel" id="telefone" placeholder="Informe o telefone" required="required">
+        </div>
+        <div>
+            <select id="sexo" required="required">
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
+        </div>
+        <div>
+            <input type="date" id="dataDeNascimento" required="required">
+        </div>
+        <button type="button" onclick="salvarUsuario()">Salvar</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</body>
+
+</html>
