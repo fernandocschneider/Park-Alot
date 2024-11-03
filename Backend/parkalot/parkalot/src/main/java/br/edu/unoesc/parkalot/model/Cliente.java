@@ -14,11 +14,11 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id")
+    @Column(name = "client_id", nullable = false, unique = true)
     private Long id;
 
     @NotNull
-    @Column(name = "client_cpf", length = 11, nullable = false)
+    @Column(name = "client_cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
     @NotNull

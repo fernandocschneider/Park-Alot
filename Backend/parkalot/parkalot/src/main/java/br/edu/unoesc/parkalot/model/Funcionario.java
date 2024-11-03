@@ -9,15 +9,15 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Funcionario")
+@Table(name = "Funcionário")
 public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "worker_id")
+    @Column(name = "worker_id", nullable = false, unique = true)
     private Long id;
 
     @NotNull
-    @Column(name = "worker_cpf", length = 11, nullable = false)
+    @Column(name = "worker_cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
     @NotNull
