@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #B7D2F8;
+    overflow: hidden;
+}
+.cadastro-container {
+    width: 570px;
+    height: 650px;
+    padding: 5px 30px;
+    background-color: #3675FE;
+    box-shadow: 5px 10px 30px rgba(0, 0, 0, 1);
+    border-radius: 30px;
+    text-align: center;
+}
+.logo {
+    width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+}
+.cadastro-container h2 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 50px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+.cadastro-container button {
+    width: 166px;
+    height: 39px;
+    margin: 0 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.button-cadastrar {
+    background-color: #3B3C40;
+    color: white;
+}
+.button-cadastrar:hover {
+    background-color: #2C2D31;
+}
+

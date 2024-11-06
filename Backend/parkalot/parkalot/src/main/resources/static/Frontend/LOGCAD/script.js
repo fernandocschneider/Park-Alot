@@ -109,3 +109,9 @@ function salvarUsuario() {
         }
     })
 }
+
+function vaiproLogin() {
+    document.getElementById('navegarBtn').addEventListener('click', function() {
+        window.location.href = './Frontend/LOGIN/index.html'
+} )
+}
