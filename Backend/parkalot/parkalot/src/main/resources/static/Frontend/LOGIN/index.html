@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; 
             height: 100vh;
             margin: 0;
+            padding-top: 50px;
             background-color: #B7D2F8;
-            overflow: hidden;
         }
-        .cadastro-container {
+        .login-container {
             width: 570px;
-            height: 650px;
+            height: 466px;
             padding: 5px 30px;
             background-color: #3675FE;
             box-shadow: 5px 10px 30px rgba(0, 0, 0, 1);
             border-radius: 30px;
             text-align: center;
+            margin-top: 20px;
         }
         .logo {
             width: 500px;
             height: auto;
             margin-bottom: 20px;
         }
-        .cadastro-container h2 {
+        .login-container h2 {
             margin-bottom: 20px;
             color: #ffffff;
             font-size: 50px;
         }
-        .cadastro-container input[type="text"],
-        .cadastro-container input[type="password"],
-        .cadastro-container input[type="tel"] {
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
             width: 400px;
             height: 30px;
             padding: 12px;
-            margin: 15px 0;
+            margin: 25px 0;
             border: none;
             border-radius: 30px;
             font-size: 16px;
@@ -50,7 +50,7 @@
             display: flex;
             justify-content: center;
         }
-        .cadastro-container button {
+        .login-container button {
             width: 166px;
             height: 39px;
             margin: 0 20px;
@@ -58,6 +58,13 @@
             border-radius: 20px;
             font-size: 16px;
             cursor: pointer;
+        }
+        .button-entrar {
+            background-color: #3B3C40;
+            color: white;
+        }
+        .button-entrar:hover {
+            background-color: #2C2D31;
         }
         .button-cadastrar {
             background-color: #3B3C40;
@@ -67,37 +74,19 @@
             background-color: #2C2D31;
         }
     </style>
-    <script src="script.js"></script>
 </head>
 <body>
-    <img src="Imagens/Logo.png" alt="Logo" class="logo">
-    <div class="cadastro-container">
-        <h2>CADASTRO</h2>
-        <form action="processar_cadastro.java" method="post">
-            <input type="text" name="nome" placeholder="Nome" required>
-            <input type="text" name="cpf" placeholder="CPF" required maxlength="14" pattern="\d{14}" title="numeros e sinais">
-            <input type="tel" name="telefone" placeholder="(00) 00000-0000" required maxlength="15" oninput="mascaraTelefone(this)">
-            <input type="text" name="email" placeholder="Email" required>
+    <img src="Imagens/Logo.png" alt="Logo" class="logo"> 
+    <div class="login-container">
+        <h2>LOGIN</h2>
+        <form action="processar_login.java" method="post">
+            <input type="text" name="emailCpf" placeholder="Email ou CPF" required>
             <input type="password" name="senha" placeholder="Senha" required>
             <div class="button-container">
-                <button type="button" class="button-cadastrar" onclick="window.location.href='index.html'">CADASTRAR</button>
+                <button type="submit" class="button-entrar">ENTRAR</button>
+                <button type="button" class="button-cadastrar" onclick="window.location.href='cadastro.html'">CADASTRAR</button>
             </div>
         </form>
     </div>
-
-    <script>
-        function mascaraTelefone(telefone) {
-            let valor = telefone.value.replace(/\D/g, "");
-            if (valor.length > 11) valor = valor.slice(0, 11);
-
-            if (valor.length > 6) {
-                telefone.value = `(${valor.slice(0, 2)}) ${valor.slice(2, 7)}-${valor.slice(7)}`;
-            } else if (valor.length > 2) {
-                telefone.value = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
-            } else {
-                telefone.value = valor;
-            }
-        }
-    </script>
 </body>
 </html>
