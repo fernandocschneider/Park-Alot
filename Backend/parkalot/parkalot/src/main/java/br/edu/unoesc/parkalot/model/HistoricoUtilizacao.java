@@ -1,39 +1,42 @@
 package br.edu.unoesc.parkalot.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
-@Entity 
-@Table(name = "Historico_utilizacao")
-public class Historico {
+@Entity
+@Table(name = "historico_utilizacao")
+public class HistoricoUtilizacao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "history_id", nullable = false, unique = true)
     private Long id;
 
-    @NotNull
     @Column(name = "history_entry_date", nullable = false)
-    private String entryDate;
+    @Temporal(TemporalType.DATE)
+    private Date entryDate;
 
-    @NotNull
     @Column(name = "history_leave_date", nullable = false)
-    private String leaveDate;
+    @Temporal(TemporalType.DATE)
+    private Date leaveDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     private Vaga spot;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "veicule_sign", referencedColumnName = "veicule_sign", nullable = false)
-    private Veiculo vehicle;
+    private Veiculo veiculo;
 
     public Long getId() {
         return id;
@@ -43,19 +46,19 @@ public class Historico {
         this.id = id;
     }
 
-    public String getEntryDate() {
+    public Date getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(String entryDate) {
+    public void setEntryDate(Date entryDate) {
         this.entryDate = entryDate;
     }
 
-    public String getLeaveDate() {
+    public Date getLeaveDate() {
         return leaveDate;
     }
 
-    public void setLeaveDate(String leaveDate) {
+    public void setLeaveDate(Date leaveDate) {
         this.leaveDate = leaveDate;
     }
 
@@ -67,17 +70,18 @@ public class Historico {
         this.spot = spot;
     }
 
-    public Veiculo getVehicle() {
-        return vehicle;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public void setVehicle(Veiculo vehicle) {
-        this.vehicle = vehicle;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     @Override
     public String toString() {
-        return "Historico{" + "id=" + id + ", entryDate='" + entryDate + '\'' + ", leaveDate='" + leaveDate + '\''
-                + ", spot=" + spot + ", vehicle=" + vehicle + '}';
+        return "HistoricoUtilizacao [id=" + id + ", entryDate=" + entryDate + ", leaveDate=" + leaveDate + ", spot="
+                + spot + ", veiculo=" + veiculo + "]";
     }
+
 }

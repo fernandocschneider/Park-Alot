@@ -9,43 +9,49 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Veiculo")
-
+@Table(name = "veiculo")
 public class Veiculo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "veicule_sign", length = 8, nullable = false, unique = true)
-    private String id;
+    @Column(name = "veiculo_id", nullable = false, unique = true)
+    private Long id;
 
-    @NotNull
+    @Column(name = "veicule_sign", length = 8, nullable = false, unique = true)
+    private String plate;
+
     @Column(name = "veicule_brand", length = 16, nullable = false)
     private String brand;
 
-    @NotNull
     @Column(name = "veicule_model", length = 16, nullable = false)
     private String model;
 
-    @NotNull
-    @Column(name = "veicule_color", length = 16, nullable = false)
+    @Column(name = "veicule_color", length = 16)
     private String color;
 
-    @NotNull
-    @Column(name = "veicule_year", length = 4, nullable = false)
+    @Column(name = "veicule_year", length = 4)
     private String year;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_cpf", referencedColumnName = "client_cpf", nullable = false)
     private Cliente owner;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPlate() {
+        return plate;
+    }
+
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 
     public String getBrand() {
@@ -90,15 +96,8 @@ public class Veiculo {
 
     @Override
     public String toString() {
-        return "Veiculo{" +
-                "id=" + id +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", color='" + color + '\'' +
-                ", year='" + year + '\'' +
-                ", owner=" + owner +
-                '}';
+        return "Veiculo [id=" + id + ", plate=" + plate + ", brand=" + brand + ", model=" + model + ", color=" + color
+                + ", year=" + year + ", owner=" + owner + "]";
     }
 
-    
 }

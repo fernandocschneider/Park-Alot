@@ -42,6 +42,7 @@ COMMENT ON COLUMN Funcionario.worker_salary IS 'Salário do funcionário';
 COMMENT ON COLUMN Funcionario.worker_admission IS 'Data de admissão do funcionário';
 
 CREATE TABLE Veiculo (
+  veiculo_id serial not null UNIQUE,
   veicule_sign varchar(8) NOT NULL UNIQUE, 
   veicule_brand varchar(16) NOT NULL, 
   veicule_model varchar(16) NOT NULL, 
@@ -51,6 +52,7 @@ CREATE TABLE Veiculo (
   PRIMARY KEY (veicule_sign));
 
 COMMENT ON TABLE Veiculo IS 'Tabela de cadastro dos veículos';
+COMMENT ON COLUMN Veiculo.veiculo_id IS 'Identificador único do veículo';
 COMMENT ON COLUMN Veiculo.veicule_sign IS 'Placa dos veículos cadastrados';
 COMMENT ON COLUMN Veiculo.veicule_brand IS 'Marca dos veículos cadastrados';
 COMMENT ON COLUMN Veiculo.veicule_model IS 'Modelo do veículo cadastrado';

@@ -1,15 +1,19 @@
 package br.edu.unoesc.parkalot.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Cliente")
+@Table(name = "cliente")
 public class Cliente {
 
     @Id
@@ -17,33 +21,27 @@ public class Cliente {
     @Column(name = "client_id", nullable = false, unique = true)
     private Long id;
 
-    @NotNull
     @Column(name = "client_cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
-    @NotNull
     @Column(name = "client_name", length = 40, nullable = false)
     private String name;
 
-    @NotNull
-    @Column(name = "client_phone", length = 11,nullable = false)
+    @Column(name = "client_phone", length = 11, nullable = false)
     private String phone;
 
-    @NotNull
-    @Column(name = "client_mail", length = 30, nullable = false)
+    @Column(name = "client_mail", length = 30, nullable = false, unique = true)
     private String email;
 
-    @NotNull
     @Column(name = "client_age", nullable = false)
-    private Byte age;
+    private Integer age;
 
     @Column(name = "client_sex", length = 1, nullable = false)
     private String sex;
 
-    public Cliente() {
-    }
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Veiculo> veiculos;
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -84,11 +82,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public @NotNull Byte getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(@NotNull Byte age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -100,16 +98,18 @@ public class Cliente {
         this.sex = sex;
     }
 
+    public List<Veiculo> getVeiculos() {
+        return veiculos;
+    }
+
+    public void setVeiculos(List<Veiculo> veiculos) {
+        this.veiculos = veiculos;
+    }
+
     @Override
     public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", cpf='" + cpf + '\'' +
-                ", name='" + name + '\'' +
-                ", phone=" + phone +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", sex='" + sex + '\'' +
-                '}';
+        return "Cliente [id=" + id + ", cpf=" + cpf + ", name=" + name + ", phone=" + phone + ", email=" + email
+                + ", age=" + age + ", sex=" + sex + ", veiculos=" + veiculos + "]";
     }
+
 }

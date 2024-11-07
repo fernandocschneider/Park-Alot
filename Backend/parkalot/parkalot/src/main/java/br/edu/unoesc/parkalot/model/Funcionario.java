@@ -6,41 +6,34 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Funcionário")
+@Table(name = "funcionario")
 public class Funcionario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "worker_id", nullable = false, unique = true)
     private Long id;
 
-    @NotNull
     @Column(name = "worker_cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
-    @NotNull
     @Column(name = "worker_name", length = 40, nullable = false)
     private String name;
 
-    @NotNull
-    @Column(name = "worker_phone", nullable = false)
-    private Integer phone;
+    @Column(name = "worker_phone", length = 11, nullable = false)
+    private String phone;
 
-    @NotNull
-    @Column(name = "worker_mail", length = 30, nullable = false)
+    @Column(name = "worker_mail", length = 30, nullable = false, unique = true)
     private String email;
 
-    @NotNull
     @Column(name = "worker_role", length = 30, nullable = false)
     private String role;
 
-    @NotNull
     @Column(name = "worker_salary", nullable = false)
-    private Integer salary;
+    private Double salary;
 
-    @NotNull
     @Column(name = "worker_admission", nullable = false)
     private Integer admission;
 
@@ -68,11 +61,11 @@ public class Funcionario {
         this.name = name;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -92,11 +85,11 @@ public class Funcionario {
         this.role = role;
     }
 
-    public Integer getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
@@ -110,16 +103,8 @@ public class Funcionario {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", cpf='" + cpf + '\'' +
-                ", name='" + name + '\'' +
-                ", phone=" + phone +
-                ", email='" + email + '\'' +
-                ", role=" + role +
-                ", salary='" + salary + '\'' +
-                ", admission='" + admission + '\'' +
-                '}';
+        return "Funcionario [id=" + id + ", cpf=" + cpf + ", name=" + name + ", phone=" + phone + ", email=" + email
+                + ", role=" + role + ", salary=" + salary + ", admission=" + admission + "]";
     }
 
 }

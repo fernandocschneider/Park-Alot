@@ -2,17 +2,15 @@ package br.edu.unoesc.parkalot.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Endereço")
+@Table(name = "endereco")
 public class Endereco {
 
     @Id
@@ -20,25 +18,21 @@ public class Endereco {
     @Column(name = "adress_number", nullable = false, unique = true)
     private Long id;
 
-    @NotNull
     @Column(name = "adress_street", length = 30, nullable = false)
     private String street;
 
-    @NotNull
     @Column(name = "adress_neighbor", length = 30, nullable = false)
     private String neighbor;
 
-    @NotNull
-    @Column(name = "adress_extra", length = 30, nullable = false)
+    @Column(name = "adress_extra", length = 30)
     private String extra;
 
-    @NotNull
     @Column(name = "adress_city", length = 40, nullable = false)
     private String city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "client_cpf", referencedColumnName = "client_cpf", nullable = false)
-    private Cliente owner;
+    private Cliente client;
 
     public Long getId() {
         return id;
@@ -80,24 +74,18 @@ public class Endereco {
         this.city = city;
     }
 
-    public Cliente getOwner() {
-        return owner;
+    public Cliente getClient() {
+        return client;
     }
 
-    public void setOwner(Cliente owner) {
-        this.owner = owner;
+    public void setClient(Cliente client) {
+        this.client = client;
     }
 
     @Override
     public String toString() {
-        return "Endereco{" +
-                "id=" + id +
-                ", street='" + street + '\'' +
-                ", neighbor='" + neighbor + '\'' +
-                ", extra='" + extra + '\'' +
-                ", city='" + city + '\'' +
-                ", owner=" + owner +
-                '}';
+        return "Endereco [id=" + id + ", street=" + street + ", neighbor=" + neighbor + ", extra=" + extra + ", city="
+                + city + ", client=" + client + "]";
     }
 
 }

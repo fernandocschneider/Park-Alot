@@ -1,43 +1,45 @@
 package br.edu.unoesc.parkalot.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "Reserva")
+@Table(name = "reserva")
 public class Reserva {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "booking_id", nullable = false, unique = true)
     private Long id;
 
-    @NotNull
     @Column(name = "booking_initial_date", nullable = false)
-    private String initialDate;
+    @Temporal(TemporalType.DATE)
+    private Date initialDate;
 
-    @NotNull
     @Column(name = "booking_final_date", nullable = false)
-    private String finalDate;
+    @Temporal(TemporalType.DATE)
+    private Date finalDate;
 
-    @NotNull
     @Column(name = "booking_status", length = 20, nullable = false)
     private String status;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     private Vaga spot;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "veicule_sign", referencedColumnName = "veicule_sign", nullable = false)
-    private Veiculo vehicle;
+    private Veiculo veiculo;
 
     public Long getId() {
         return id;
@@ -47,19 +49,19 @@ public class Reserva {
         this.id = id;
     }
 
-    public String getInitialDate() {
+    public Date getInitialDate() {
         return initialDate;
     }
 
-    public void setInitialDate(String initialDate) {
+    public void setInitialDate(Date initialDate) {
         this.initialDate = initialDate;
     }
 
-    public String getFinalDate() {
+    public Date getFinalDate() {
         return finalDate;
     }
 
-    public void setFinalDate(String finalDate) {
+    public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
     }
 
@@ -79,23 +81,18 @@ public class Reserva {
         this.spot = spot;
     }
 
-    public Veiculo getVehicle() {
-        return vehicle;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public void setVehicle(Veiculo vehicle) {
-        this.vehicle = vehicle;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     @Override
     public String toString() {
-        return "Reserva{" +
-                "id=" + id +
-                ", initialDate='" + initialDate + '\'' +
-                ", finalDate='" + finalDate + '\'' +
-                ", status='" + status + '\'' +
-                ", spot=" + spot +
-                ", vehicle=" + vehicle +
-                '}';
+        return "Reserva [id=" + id + ", initialDate=" + initialDate + ", finalDate=" + finalDate + ", status=" + status
+                + ", spot=" + spot + ", veiculo=" + veiculo + "]";
     }
+
 }

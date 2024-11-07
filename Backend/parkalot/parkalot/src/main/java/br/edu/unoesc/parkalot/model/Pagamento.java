@@ -1,39 +1,40 @@
 package br.edu.unoesc.parkalot.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "Pagamento")
+@Table(name = "pagamento")
 public class Pagamento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id", nullable = false, unique = true)
     private Long id;
 
-    @NotNull
     @Column(name = "payment_cost", nullable = false)
-    private String cost;
+    private Double cost;
 
-    @NotNull
     @Column(name = "payment_date", nullable = false)
-    private String date;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
-    @NotNull
     @Column(name = "payment_method", length = 50, nullable = false)
     private String method;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "booking_id", referencedColumnName = "booking_id", nullable = false)
-    private Reserva booking;
+    private Reserva reserva;
 
     public Long getId() {
         return id;
@@ -43,19 +44,19 @@ public class Pagamento {
         this.id = id;
     }
 
-    public String getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -68,16 +69,17 @@ public class Pagamento {
     }
 
     public Reserva getReserva() {
-        return booking;
+        return reserva;
     }
 
     public void setReserva(Reserva reserva) {
-        this.booking = reserva;
+        this.reserva = reserva;
     }
 
     @Override
     public String toString() {
-        return "Pagamento{" + "id=" + id + ", cost='" + cost + '\'' + ", date='" + date + '\'' + ", method='" + method
-                + '\'' + ", reserva=" + booking + '}';
+        return "Pagamento [id=" + id + ", cost=" + cost + ", date=" + date + ", method=" + method + ", reserva="
+                + reserva + "]";
     }
+
 }

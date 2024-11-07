@@ -13,29 +13,30 @@
     <div class="cadastro-container">
         <form action="" id="formCadastroCliente">
             <h2>Cadastre-se</h2>
-            <div>
+            <div class="cadastro-fields">
                 <input type="text" id="nome" placeholder="Informe o nome" required="required">
             </div>
-            <div>
+            <div class="cadastro-fields">
                 <input type="text" id="cpf" placeholder="Informe o CPF" required="required">
             </div>
-            <div>
+            <div class="cadastro-fields">
                 <input type="email" id="email" placeholder="Informe o email" required="required">
             </div>
-            <div>
+            <div class="cadastro-fields">
                 <input type="tel" id="telefone" placeholder="Informe o telefone" required="required">
             </div>
-            <div>
+            <div class="cadastro-fields">
                 <select id="sexo" required="required">
+                    <option value="" disabled selected>Selecione o sexo</option>
                     <option value="M">Masculino</option>
                     <option value="F">Feminino</option>
                 </select>
             </div>
-            <div>
+            <div class="cadastro-fields">
                 <input type="date" id="dataDeNascimento" required="required">
             </div>
             <button type="button" onclick="salvarUsuario()">Cadastrar</button>
-            <button id="navegarBtn">Login</button>
+            <button id="navegarBtn" onclick="window.location.href='./Frontend/LOGIN/index.html'">Já possui conta ? Entre</button>
         </form>
     </div>
 </body>

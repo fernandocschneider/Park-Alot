@@ -3,42 +3,34 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; 
     height: 100vh;
     margin: 0;
+    padding-top: 50px;
     background-color: #B7D2F8;
-    overflow: hidden;
 }
-.cadastro-container {
+.login-container {
     width: 570px;
-    height: 650px;
+    height: 466px;
     padding: 5px 30px;
     background-color: #3675FE;
     box-shadow: 5px 10px 30px rgba(0, 0, 0, 1);
     border-radius: 30px;
     text-align: center;
+    margin-top: 20px;
 }
 .logo {
     width: 500px;
     height: auto;
     margin-bottom: 20px;
 }
-.cadastro-container h2 {
+.login-container h2 {
     margin-bottom: 20px;
     color: #ffffff;
     font-size: 50px;
 }
-
-.button-container {
-    display: flex;
-    justify-content: center;
-}
-.cadastro-fields input[type="text"],
-.cadastro-fields input[type="password"],
-.cadastro-fields input[type="email"],
-.cadastro-fields input[type="tel"],
-.cadastro-fields input[type="date"],
-.cadastro-fields select {
+.login-container input[type="text"],
+.login-container input[type="password"] {
     width: 400px;
     height: 30px;
     padding: 12px;
@@ -47,7 +39,26 @@ body {
     border-radius: 30px;
     font-size: 16px;
 }
-
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+.login-container button {
+    width: 166px;
+    height: 39px;
+    margin: 0 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.button-entrar {
+    background-color: #3B3C40;
+    color: white;
+}
+.button-entrar:hover {
+    background-color: #2C2D31;
+}
 .button-cadastrar {
     background-color: #3B3C40;
     color: white;
@@ -55,4 +66,3 @@ body {
 .button-cadastrar:hover {
     background-color: #2C2D31;
 }
-
