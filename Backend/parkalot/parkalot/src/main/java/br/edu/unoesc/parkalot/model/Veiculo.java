@@ -1,5 +1,7 @@
 package br.edu.unoesc.parkalot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,7 +37,8 @@ public class Veiculo {
     private String year;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_cpf", referencedColumnName = "client_cpf", nullable = false)
+    @JoinColumn(name = "client_id", referencedColumnName = "client_id", nullable = false)
+    @JsonIgnoreProperties({"id", "name", "phone", "email", "age", "sex", "veiculos"})
     private Cliente owner;
 
     public Long getId() {

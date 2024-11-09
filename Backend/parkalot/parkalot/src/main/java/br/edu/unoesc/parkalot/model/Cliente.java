@@ -2,6 +2,8 @@ package br.edu.unoesc.parkalot.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,6 +42,7 @@ public class Cliente {
     private String sex;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"id", "brand", "owner"})
     private List<Veiculo> veiculos;
 
     public Long getId() {

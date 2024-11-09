@@ -95,7 +95,7 @@ CREATE TABLE Vaga (
   spot_available char(1) NOT NULL CHECK(spot_available in ('D' , 'I')), 
   spot_time   time(7) NOT NULL, 
   spot_local  varchar(50) not null, 
-  fix_id    int4 NOT NULL UNIQUE, 
+  fix_id    int4 UNIQUE, 
   PRIMARY KEY (spot_id));
 
 COMMENT ON TABLE Vaga IS 'Tabela de Gereciamento das vagas';
