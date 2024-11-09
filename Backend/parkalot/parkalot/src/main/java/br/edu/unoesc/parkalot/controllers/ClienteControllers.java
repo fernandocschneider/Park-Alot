@@ -1,6 +1,7 @@
 package br.edu.unoesc.parkalot.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,5 +72,16 @@ public class ClienteControllers {
             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
         }
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "verificarLogin")
+    @ResponseBody
+    public ResponseEntity<String> verificarLogin(@RequestBody Cliente cliente) {
+        Optional<Cliente> clienteOptional = clienteRepository.findByCpfAndEmail(cliente.getCpf(), cliente.getEmail());
+        if (clienteOptional.isPresent()) {
+            return new ResponseEntity<String>("Login bem-sucedido", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("Login inválido", HttpStatus.UNAUTHORIZED);
+        }
     }
 }
