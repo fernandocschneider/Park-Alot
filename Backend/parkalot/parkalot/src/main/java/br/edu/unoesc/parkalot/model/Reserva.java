@@ -1,6 +1,6 @@
 package br.edu.unoesc.parkalot.model;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,10 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "reserva")
 public class Reserva {
 
@@ -22,13 +21,13 @@ public class Reserva {
     @Column(name = "booking_id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "booking_initial_date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date initialDate;
+    // @Column(name = "booking_initial_date", nullable = false)
+    // @Temporal(TemporalType.DATE)
+    // private Date initialDate;
 
-    @Column(name = "booking_final_date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date finalDate;
+    // @Column(name = "booking_final_date", nullable = false)
+    // @Temporal(TemporalType.DATE)
+    // private Date finalDate;
 
     @Column(name = "booking_status", length = 20, nullable = false)
     private String status;
@@ -49,21 +48,21 @@ public class Reserva {
         this.id = id;
     }
 
-    public Date getInitialDate() {
-        return initialDate;
-    }
+    // public Date getInitialDate() {
+    //     return initialDate;
+    // }
 
-    public void setInitialDate(Date initialDate) {
-        this.initialDate = initialDate;
-    }
+    // public void setInitialDate(Date initialDate) {
+    //     this.initialDate = initialDate;
+    // }
 
-    public Date getFinalDate() {
-        return finalDate;
-    }
+    // public Date getFinalDate() {
+    //     return finalDate;
+    // }
 
-    public void setFinalDate(Date finalDate) {
-        this.finalDate = finalDate;
-    }
+    // public void setFinalDate(Date finalDate) {
+    //     this.finalDate = finalDate;
+    // }
 
     public String getStatus() {
         return status;
@@ -91,8 +90,10 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva [id=" + id + ", initialDate=" + initialDate + ", finalDate=" + finalDate + ", status=" + status
-                + ", spot=" + spot + ", veiculo=" + veiculo + "]";
+        return "Reserva [id=" + id + ", initialDate=" + 
+        /*initialDate + ", finalDate=" + finalDate + */
+        ", status=" + status + ", spot=" + spot + 
+        ", veiculo=" + veiculo + "]";
     }
 
 }

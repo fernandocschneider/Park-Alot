@@ -2,6 +2,8 @@ package br.edu.unoesc.parkalot.model;
 
 import java.sql.Time;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "vaga")
 public class Vaga {
 
@@ -19,7 +22,7 @@ public class Vaga {
     private Long id;
 
     @Column(name = "spot_available", length = 1, nullable = false)
-    private String available;
+    private boolean available;
 
     @Column(name = "spot_time", nullable = false)
     private Time time;
@@ -35,11 +38,11 @@ public class Vaga {
         this.id = id;
     }
 
-    public String getAvailable() {
+    public boolean getAvailable() {
         return available;
     }
 
-    public void setAvailable(String available) {
+    public void setAvailable(boolean available) {
         this.available = available;
     }
 
