@@ -42,17 +42,70 @@ body {
     width: 400px;
     height: 30px;
     padding: 12px;
-    margin: 25px 0;
+    margin: 10px 0;
     border: none;
     border-radius: 30px;
     font-size: 16px;
 }
-
-.button-cadastrar {
-    background-color: #3B3C40;
-    color: white;
+.cadastro-fields select {
+    width: 430px; 
+    height: 54px; 
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    color: #555555;
+    background-color: #ffffff;
+    appearance: none;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233675FE"%3E%3Cpath d="M7 10l5 5 5-5z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 30px;
 }
-.button-cadastrar:hover {
-    background-color: #2C2D31;
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.botao {
+    width: 150px; 
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    background-color: #3B3C40; 
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botao:hover {
+    background-color: #ffffff90;
+}
+.link-botao {
+    background-color: #3B3C40; 
+    color: #ffffff;
+    border: none;
+    border-radius: 20px; 
+    padding: 5px 15px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.link-botao:hover {
+    background-color: #ffffff90; 
+}
+
+
+.link-botao:focus {
+    outline: none;
 }
 

@@ -34,7 +34,7 @@ body {
     width: 400px;
     height: 30px;
     padding: 12px;
-    margin: 25px 0;
+    margin: 20px 0;
     border: none;
     border-radius: 30px;
     font-size: 16px;
@@ -51,18 +51,19 @@ body {
     border-radius: 20px;
     font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 .button-entrar {
     background-color: #3B3C40;
     color: white;
 }
 .button-entrar:hover {
-    background-color: #2C2D31;
+    background-color: #ffffff90;
 }
 .button-cadastrar {
     background-color: #3B3C40;
     color: white;
 }
 .button-cadastrar:hover {
-    background-color: #2C2D31;
+    background-color: #ffffff90;
 }
