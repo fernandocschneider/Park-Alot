@@ -74,22 +74,27 @@ body {
 }
 
 .botao {
-    width: 150px; 
-    padding: 10px;
-    border: none;
+    width: 166px;
+    height: 39px;
+    border: 2px solid white;
     border-radius: 20px;
-    font-size: 18px;
-    background-color: #3B3C40; 
-    color: #ffffff;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    font-family: "Roboto", sans-serif;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
+
 .botao:hover {
-    background-color: #ffffff90;
+    color:#000;
+    background-color: #ffffff;
 }
 .link-botao {
-    background-color: #3B3C40; 
+    background-color: transparent !important;  
     color: #ffffff;
     border: none;
     border-radius: 20px; 
@@ -101,7 +106,8 @@ body {
 }
 
 .link-botao:hover {
-    background-color: #ffffff90; 
+    color: #000;
+    background-color: #ffffff; 
 }
 
 
