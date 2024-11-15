@@ -48,7 +48,7 @@ public class ClienteControllers {
      * @param cliente Objeto Cliente a ser salvo.
      * @return ResponseEntity contendo o cliente salvo e o status HTTP CREATED.
      */
-    @PostMapping(value = "salvarCliente")
+    @PostMapping(value = "salvar")
     @ResponseBody
     public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
         cliente = clienteRepository.save(cliente);

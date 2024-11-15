@@ -73,45 +73,40 @@ function salvarUsuario() {
     }
 
     verificarCPF(client_cpf)
-    .then(function (exists) {
-        if (exists) {
-            alert("CPF já cadastrado");
-            return false;
-        } else {
-            verificarEmail(client_mail)
-            .then(function (exists) {
-                if (exists) {
-                    alert("E-mail já cadastrado");
-                    return false;
-                } else {
-                    return $.ajax({
-                        method: "POST",
-                        url: "salvar",
-                        data: JSON.stringify({
-                            name: client_name,
-                            cpf: client_cpf,
-                            email: client_mail,
-                            phone: client_phone,
-                            age: idade,
-                            sex: client_sex
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        success: function (response) {
-                            $("#id").val(response.id);
-                            alert("Cadastro realizado com sucesso");
+        .then(function (exists) {
+            if (exists) {
+                alert("CPF já cadastrado");
+                return false;
+            } else {
+                verificarEmail(client_mail)
+                    .then(function (exists) {
+                        if (exists) {
+                            alert("E-mail já cadastrado");
+                            return false;
+                        } else {
+                            return $$.ajax({
+                                method: "POST",
+                                url: "salvar",
+                                data: JSON.stringify({
+                                    nome: client_name,
+                                    cpf: client_cpf,
+                                    email: client_mail,
+                                    telefone: client_phone,
+                                    dataDeNascimento: client_age,
+                                    sexo: client_sex
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (response) {
+                                    $("#id").val(response.id);
+                                    alert("Cadastro realizado com sucesso");
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error("Erro ao realizar o cadastro:", status, error, xhr.responseText);
+                                    alert("Erro ao realizar o cadastro: " + xhr.responseText + "\nStatus: " + status + "\nErro: " + error);
+                                }
+                            });
                         }
-                    }).fail(function (xhr, status, error) {
-                        console.error("Erro ao realizar o cadastro:", status, error, xhr.responseText);
-                        alert("Erro ao realizar o cadastro: " + xhr.responseText + "\nStatus: " + status + "\nErro: " + error);
                     })
-                }
-            })
-        }
-    })
-}
-
-function vaiproLogin() {
-    document.getElementById('navegarBtn').addEventListener('click', function() {
-        window.location.href = './Frontend/LOGIN/index.html'
-} )
+            }
+        })
 }
