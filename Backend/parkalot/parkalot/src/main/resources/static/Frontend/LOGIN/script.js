@@ -1,5 +1,4 @@
 function logarUsuario() {
-
     const email = document.getElementById('email').value;
     const cpf = document.getElementById('cpf').value;
 
@@ -15,16 +14,22 @@ function logarUsuario() {
         },
         body: JSON.stringify({ cpf: cpf, email: email })
     })
-    .then(response => {
-        if (response.status === 200) {
-            alert('Login bem-sucedido!');
-            // window.location.href = '../../index.html'; // ESPERAR PARA PÁGINA ESTAR PRONTA =D
-        } else {
-            alert('Login inválido. Verifique CPF e/ou email.');
-        }
-    })
-    .catch(error => {
-        console.error('Erro no login:', error);
-        alert('Erro ao tentar fazer login.');
-    });
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log('Dados recebidos do servidor:', data);
+
+            if (data.status === "success") {
+                alert("Login bem-sucedido!");
+                console.log("Redirecionando para:", data.redirectUrl);
+                window.location.replace(data.redirectUrl);
+            } else {
+                alert(data.message || "Login inválido.");
+            }
+        })
+        .catch(error => {
+            console.error('Erro no login:', error);
+            alert('Erro ao tentar fazer login.');
+        });
 }

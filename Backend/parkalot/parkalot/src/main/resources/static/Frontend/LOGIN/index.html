@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,25 @@
     <link rel="stylesheet" href="./style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
 
-    <img src="Imagens/Logo.png" alt="Logo" class="logo"> 
+    <img src="Imagens/Logo.png" alt="Logo" class="logo">
 
     <div class="login-container">
         <h2>LOGIN</h2>
         <form action="" id="formLoginCliente" onsubmit="event.preventDefault(); logarUsuario();">
             <input type="text" name="email" id="email" placeholder="Email" required>
             <input type="text" name="CPF" id="cpf" placeholder="CPF" required>
-            
-  
+
+
             <div class="button-container">
                 <button type="submit" class="button-entrar">ENTRAR</button>
-                <button type="button" class="button-cadastrar" onclick="window.location.href='../../index.html'">CADASTRAR</button>
+                <button type="button" class="button-cadastrar"
+                    onclick="window.location.href='../../index.html'">CADASTRAR</button>
             </div>
         </form>
     </div>
 </body>
-</html>
 
+</html>

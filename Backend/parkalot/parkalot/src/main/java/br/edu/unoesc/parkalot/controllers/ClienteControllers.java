@@ -1,6 +1,8 @@
 package br.edu.unoesc.parkalot.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,12 +131,22 @@ public class ClienteControllers {
      */
     @PostMapping(value = "verificarLogin")
     @ResponseBody
-    public ResponseEntity<String> verificarLogin(@RequestBody Cliente cliente) {
+    public ResponseEntity<Map<String, Object>> verificarLogin(@RequestBody Cliente cliente) {
         Optional<Cliente> clienteOptional = clienteRepository.findByCpfAndEmail(cliente.getCpf(), cliente.getEmail());
+
+        Map<String, Object> responseMap = new HashMap<>();
         if (clienteOptional.isPresent()) {
-            return new ResponseEntity<String>("Login bem-sucedido", HttpStatus.OK);
+
+            responseMap.put("status", "success");
+            responseMap.put("redirectUrl", "http://localhost:8080/Frontend/VAGAS/index.html");
+
+            return ResponseEntity.ok(responseMap);
         } else {
-            return new ResponseEntity<String>("Login inválido", HttpStatus.UNAUTHORIZED);
+
+            responseMap.put("status", "error");
+            responseMap.put("message", "Login inválido. Verifique CPF e/ou email.");
+            return ResponseEntity.status(401).body(responseMap);
         }
     }
+
 }
