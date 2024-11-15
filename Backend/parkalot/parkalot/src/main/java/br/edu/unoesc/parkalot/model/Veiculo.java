@@ -12,34 +12,62 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Classe que representa um veículo no sistema.
+ * A tabela 'veiculo' contém informações sobre a placa, marca, modelo,
+ * cor, ano de fabricação e o proprietário do veículo.
+ * 
+ * @author Jean Toral
+ */
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "veiculo")
 public class Veiculo {
 
+    /**
+     * Identificador único do veículo.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "veiculo_id", nullable = false, unique = true)
     private Long id;
 
+    /**
+     * Placa do veículo.
+     */
     @Column(name = "veicule_sign", length = 8, nullable = false, unique = true)
     private String plate;
 
+    /**
+     * Marca do veículo.
+     */
     @Column(name = "veicule_brand", length = 16, nullable = false)
     private String brand;
 
+    /**
+     * Modelo do veículo.
+     */
     @Column(name = "veicule_model", length = 16, nullable = false)
     private String model;
 
+    /**
+     * Cor do veículo.
+     */
     @Column(name = "veicule_color", length = 16)
     private String color;
 
+    /**
+     * Ano de fabricação do veículo.
+     */
     @Column(name = "veicule_year", length = 4)
     private String year;
 
+    /**
+     * Proprietário do veículo, que é uma referência à entidade Cliente.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "client_id", nullable = false)
-    @JsonIgnoreProperties({"id", "name", "phone", "email", "age", "sex", "veiculos"})
+    @JsonIgnoreProperties({ "id", "name", "phone", "email", "age", "sex", "veiculos" })
     private Cliente owner;
 
     public Long getId() {

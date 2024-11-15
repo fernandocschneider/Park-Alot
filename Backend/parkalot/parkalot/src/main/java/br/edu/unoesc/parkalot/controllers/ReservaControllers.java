@@ -16,6 +16,13 @@ import br.edu.unoesc.parkalot.model.Reserva;
 import br.edu.unoesc.parkalot.model.Vaga;
 import br.edu.unoesc.parkalot.model.Veiculo;
 
+/**
+ * Controller responsável pelo gerenciamento das reservas de vagas de
+ * estacionamento.
+ * Implementa operações CRUD e reserva de vagas.
+ * 
+ * @author Jean Toral
+ */
 @RestController
 public class ReservaControllers {
 
@@ -28,18 +35,36 @@ public class ReservaControllers {
     @Autowired
     private br.edu.unoesc.parkalot.repository.veiculoRepository veiculoRepository;
 
+    /**
+     * Retorna a lista de todas as reservas cadastradas.
+     * 
+     * @return ResponseEntity contendo a lista de reservas e o status HTTP OK.
+     */
     @GetMapping(value = "listaReservas")
     public ResponseEntity<List<Reserva>> listaReservas() {
         List<Reserva> reservas = reservaRepository.findAll();
         return new ResponseEntity<List<Reserva>>(reservas, HttpStatus.OK);
     }
 
+    /**
+     * Salva uma nova reserva no repositório.
+     * 
+     * @param reserva Objeto Reserva a ser salvo.
+     * @return ResponseEntity contendo a reserva criada e o status HTTP CREATED.
+     */
     @PostMapping(value = "salvarReserva")
     public ResponseEntity<?> salvarReserva(@RequestBody Reserva reserva) {
         reserva = reservaRepository.save(reserva);
         return new ResponseEntity<Reserva>(HttpStatus.CREATED);
     }
 
+    /**
+     * Atualiza uma reserva existente.
+     * 
+     * @param reserva Objeto Reserva com os dados atualizados.
+     * @return ResponseEntity contendo a reserva atualizada ou uma mensagem de erro
+     *         se o ID não for informado.
+     */
     @PutMapping(value = "atualizarReserva")
     public ResponseEntity<?> atualizarReserva(@RequestBody Reserva reserva) {
         if (reserva.getId() == null) {
@@ -49,12 +74,29 @@ public class ReservaControllers {
         return new ResponseEntity<Reserva>(reserva, HttpStatus.OK);
     }
 
+    /**
+     * Exclui uma reserva com base no ID informado.
+     * 
+     * @param idReserva ID da reserva a ser excluída.
+     * @return ResponseEntity com o status HTTP OK.
+     */
     @GetMapping(value = "deleteReserva")
     public ResponseEntity<Reserva> deleteReserva(@RequestParam Long idReserva) {
         reservaRepository.deleteById(idReserva);
         return new ResponseEntity<Reserva>(HttpStatus.OK);
     }
 
+    /**
+     * Reserva uma vaga de estacionamento para um veículo, verificando a
+     * disponibilidade.
+     * 
+     * @param spotId ID da vaga a ser reservada.
+     * @param plate  Placa do veículo que deseja a reserva.
+     * @return ResponseEntity contendo a reserva criada ou mensagens de erro com os
+     *         respectivos
+     *         status HTTP, caso o veículo ou a vaga não sejam encontrados ou
+     *         estejam ocupados.
+     */
     @PostMapping(path = "/reservarVaga", produces = "application/json")
     public ResponseEntity<?> reservarVaga(
             @RequestParam Long spotId,

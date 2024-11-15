@@ -11,31 +11,42 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Classe que representa uma reserva de vaga para um veículo no estacionamento.
+ * A tabela 'reserva' contém informações sobre o status da reserva,
+ * a vaga associada e o veículo que fez a reserva.
+ * 
+ * @author Jean Toral
+ */
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "reserva")
 public class Reserva {
 
+    /**
+     * Identificador único da reserva.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "booking_id", nullable = false, unique = true)
     private Long id;
 
-    // @Column(name = "booking_initial_date", nullable = false)
-    // @Temporal(TemporalType.DATE)
-    // private Date initialDate;
-
-    // @Column(name = "booking_final_date", nullable = false)
-    // @Temporal(TemporalType.DATE)
-    // private Date finalDate;
-
+    /**
+     * Status da reserva (ex: "confirmada", "pendente", "finalizada").
+     */
     @Column(name = "booking_status", length = 20, nullable = false)
     private String status;
 
+    /**
+     * A vaga associada à reserva.
+     */
     @OneToOne
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     private Vaga spot;
 
+    /**
+     * O veículo que fez a reserva.
+     */
     @OneToOne
     @JoinColumn(name = "veicule_sign", referencedColumnName = "veicule_sign", nullable = false)
     private Veiculo veiculo;
@@ -47,22 +58,6 @@ public class Reserva {
     public void setId(Long id) {
         this.id = id;
     }
-
-    // public Date getInitialDate() {
-    //     return initialDate;
-    // }
-
-    // public void setInitialDate(Date initialDate) {
-    //     this.initialDate = initialDate;
-    // }
-
-    // public Date getFinalDate() {
-    //     return finalDate;
-    // }
-
-    // public void setFinalDate(Date finalDate) {
-    //     this.finalDate = finalDate;
-    // }
 
     public String getStatus() {
         return status;
@@ -90,10 +85,9 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva [id=" + id + ", initialDate=" + 
-        /*initialDate + ", finalDate=" + finalDate + */
-        ", status=" + status + ", spot=" + spot + 
-        ", veiculo=" + veiculo + "]";
+        return "Reserva [id=" + id + ", initialDate=" +
+                ", status=" + status + ", spot=" + spot +
+                ", veiculo=" + veiculo + "]";
     }
 
 }

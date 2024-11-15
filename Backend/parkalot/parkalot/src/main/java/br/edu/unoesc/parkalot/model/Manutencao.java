@@ -15,26 +15,50 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+/**
+ * Classe que representa o registro de uma manutenção realizada no sistema de
+ * estacionamento.
+ * A tabela 'manutencao' contém informações sobre a manutenção realizada, como
+ * descrição,
+ * data, custo e o trabalhador responsável.
+ * 
+ * @author Jean Toral
+ */
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "manutencao")
 public class Manutencao {
 
+    /**
+     * Identificador único da manutenção.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fix_id", nullable = false, unique = true)
     private Long id;
 
+    /**
+     * Descrição da manutenção realizada.
+     */
     @Column(name = "fix_description", length = 50, nullable = false)
     private String description;
 
+    /**
+     * Data em que a manutenção foi realizada.
+     */
     @Column(name = "fix_date")
     @Temporal(TemporalType.DATE)
     private Date date;
 
+    /**
+     * Custo da manutenção realizada.
+     */
     @Column(name = "fix_cost", nullable = false)
     private Double cost;
 
+    /**
+     * Funcionário responsável pela manutenção.
+     */
     @OneToOne
     @JoinColumn(name = "worker_cpf", referencedColumnName = "worker_cpf", nullable = false)
     private Funcionario worker;

@@ -14,36 +14,67 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+/**
+ * Classe que representa um Cliente no sistema. Um cliente pode possuir um ou
+ * mais veículos e seus dados estão mapeados na tabela 'cliente' do banco de
+ * dados.
+ * 
+ * @author Jean Toral
+ */
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "cliente")
 public class Cliente {
 
+    /**
+     * Identificador único do cliente.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "client_id", nullable = false, unique = true)
     private Long id;
 
+    /**
+     * CPF do cliente, valor único e obrigatório.
+     */
     @Column(name = "client_cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
+    /**
+     * Nome completo do cliente.
+     */
     @Column(name = "client_name", length = 40, nullable = false)
     private String name;
 
+    /**
+     * Telefone de contato do cliente.
+     */
     @Column(name = "client_phone", length = 11, nullable = false)
     private String phone;
 
+    /**
+     * E-mail do cliente, valor único e obrigatório.
+     */
     @Column(name = "client_mail", length = 30, nullable = false, unique = true)
     private String email;
 
+    /**
+     * Idade do cliente.
+     */
     @Column(name = "client_age", nullable = false)
     private Integer age;
 
+    /**
+     * Sexo do cliente (M - Masculino, F - Feminino).
+     */
     @Column(name = "client_sex", length = 1, nullable = false)
     private String sex;
 
+    /**
+     * Lista de veículos associados ao cliente.
+     */
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"id", "brand", "owner"})
+    @JsonIgnoreProperties({ "id", "brand", "owner" })
     private List<Veiculo> veiculos;
 
     public Long getId() {

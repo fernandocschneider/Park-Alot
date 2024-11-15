@@ -17,12 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unoesc.parkalot.model.Cliente;
 
+/**
+ * Controller para a entidade Cliente.
+ * Responsável por gerenciar as operações CRUD e validações relacionadas ao
+ * Cliente.
+ * 
+ * @author Jean Toral
+ */
 @RestController
 public class ClienteControllers {
 
     @Autowired
     private br.edu.unoesc.parkalot.repository.clienteRepository clienteRepository;
 
+    /**
+     * Retorna uma lista de todos os clientes cadastrados.
+     * 
+     * @return ResponseEntity contendo a lista de clientes e o status HTTP OK.
+     */
     @GetMapping(value = "listaClientes")
     @ResponseBody
     public ResponseEntity<List<Cliente>> listaCliente() {
@@ -30,6 +42,12 @@ public class ClienteControllers {
         return new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
     }
 
+    /**
+     * Salva um novo cliente no repositório.
+     * 
+     * @param cliente Objeto Cliente a ser salvo.
+     * @return ResponseEntity contendo o cliente salvo e o status HTTP CREATED.
+     */
     @PostMapping(value = "salvarCliente")
     @ResponseBody
     public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
@@ -37,6 +55,12 @@ public class ClienteControllers {
         return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
     }
 
+    /**
+     * Exclui um cliente do repositório com base no ID fornecido.
+     * 
+     * @param idclient ID do cliente a ser excluído.
+     * @return ResponseEntity com o status HTTP OK.
+     */
     @DeleteMapping(value = "deleteCliente")
     @ResponseBody
     public ResponseEntity<Cliente> delete(@RequestParam Long idclient) {
@@ -44,6 +68,13 @@ public class ClienteControllers {
         return new ResponseEntity<Cliente>(HttpStatus.OK);
     }
 
+    /**
+     * Atualiza as informações de um cliente existente.
+     * 
+     * @param cliente Objeto Cliente com as novas informações.
+     * @return ResponseEntity contendo o cliente atualizado e o status HTTP OK,
+     *         ou uma mensagem de erro se o ID não for informado.
+     */
     @PutMapping(value = "atualizarCliente")
     @ResponseBody
     public ResponseEntity<?> atualizar(@RequestBody Cliente cliente) {
@@ -54,6 +85,13 @@ public class ClienteControllers {
         return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
     }
 
+    /**
+     * Verifica se um CPF já está cadastrado.
+     * 
+     * @param cpf CPF do cliente a ser verificado.
+     * @return ResponseEntity contendo true se o CPF existir, false caso contrário,
+     *         com status HTTP OK.
+     */
     @GetMapping(value = "verificarCPF")
     @ResponseBody
     public ResponseEntity<Boolean> verificarCPF(@RequestParam(name = "cpf") String cpf) {
@@ -64,6 +102,14 @@ public class ClienteControllers {
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
+    /**
+     * Verifica se um e-mail já está cadastrado.
+     * 
+     * @param email E-mail do cliente a ser verificado.
+     * @return ResponseEntity contendo true se o e-mail existir, false caso
+     *         contrário,
+     *         com status HTTP OK.
+     */
     @GetMapping(value = "verificarEmail")
     @ResponseBody
     public ResponseEntity<Boolean> verificarEmail(@RequestParam(name = "email") String email) {
@@ -74,6 +120,13 @@ public class ClienteControllers {
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
+    /**
+     * Verifica se um login com CPF e e-mail é válido.
+     * 
+     * @param cliente Objeto Cliente contendo CPF e e-mail.
+     * @return ResponseEntity com uma mensagem de sucesso se o login for válido,
+     *         ou uma mensagem de erro com status HTTP UNAUTHORIZED caso contrário.
+     */
     @PostMapping(value = "verificarLogin")
     @ResponseBody
     public ResponseEntity<String> verificarLogin(@RequestBody Cliente cliente) {
