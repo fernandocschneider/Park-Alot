@@ -48,7 +48,7 @@ public class RelacionarCarroeVaga {
             return new ResponseEntity<String>("Carro ou Vaga não encontrados", HttpStatus.NOT_FOUND);
         }
 
-        if (!vaga.isAvailable()) {
+        if (!vaga.getAvailable()) {
             return new ResponseEntity<String>("Vaga já ocupada", HttpStatus.CONFLICT);
         }
 
