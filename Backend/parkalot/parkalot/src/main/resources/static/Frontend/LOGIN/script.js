@@ -1,3 +1,4 @@
+// Função para logar o usuário
 function logarUsuario() {
     const email = document.getElementById('email').value;
     const cpf = document.getElementById('cpf').value;
@@ -23,7 +24,10 @@ function logarUsuario() {
             if (data.status === "success") {
                 alert("Login bem-sucedido!");
                 console.log("Redirecionando para:", data.redirectUrl);
-                window.location.replace(data.redirectUrl);
+                // Salva as informações do usuário no localStorage após o login bem-sucedido
+                localStorage.setItem('userId', data.userId);  // Salva o userId no localStorage
+                localStorage.setItem('cpf', cpf);  // Salva o CPF no localStorage
+                window.location.replace(data.redirectUrl);  // Redireciona para a URL fornecida
             } else {
                 alert(data.message || "Login inválido.");
             }

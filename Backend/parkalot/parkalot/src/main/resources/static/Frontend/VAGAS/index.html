@@ -1,45 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vagas</title>
+    <title>Adicionar Veículo</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <div class="header">VAGAS</div>
+    <div class="header">
+        <h1>Relacionar Carro e Vaga</h1>
+    </div>
 
-
-    <div class="wrapper">
+    <!-- Container flex para colocar os dois formulários lado a lado -->
+    <div class="flex-container">
+        <!-- Formulário para selecionar o carro e a vaga -->
         <div class="container">
             <div class="card">
-                Shopping
-                <p>Avenida Parada, 5236</p>
+                <h2>Escolha o Carro e a Vaga</h2>
+                <form id="formRelacionarCarroVaga">
+                    <label for="carroSelect">Carro:</label>
+                    <select id="carroSelect" class="input-field" required>
+                        <option value="">Selecione um carro</option>
+                    </select>
+
+                    <label for="vagaSelect">Vaga:</label>
+                    <select id="vagaSelect" class="input-field" required>
+                        <option value="">Selecione uma vaga</option>
+                    </select>
+
+                    <button type="submit" class="button-entrar">Relacionar</button>
+                </form>
             </div>
+        </div>
+
+        <!-- Formulário para adicionar um novo carro -->
+        <div class="container">
             <div class="card">
-                Hotel
-                <p>Rua 15 de Novembro, 8888</p>
-            </div>
-            <div class="card">
-                Hospital
-                <p>Avenida JK, 4568</p>
-            </div>
-            <div class="card">
-                Centro de Eventos
-                <p>Rua dos Bobo, 0000</p>
-            </div>
-            <div class="card">
-                Hospital 2
-                <p>Rua Torta, 1234</p>
-            </div>
-            <div class="card">
-                Hotel 2
-                <p>Rua Normal, 7894</p>
+                <h2>Adicionar Novo Carro</h2>
+                <form id="formAdicionarCarro">
+                    <label for="modeloInput">Modelo:</label>
+                    <input type="text" id="modeloInput" class="input-field" name="modelo" required>
+
+                    <label for="marcaInput">Marca:</label>
+                    <input type="text" id="marcaInput" class="input-field" name="marca" required>
+
+                    <label for="placaInput">Placa:</label>
+                    <input type="text" id="placaInput" class="input-field" name="placa" required>
+
+                    <label for="corInput">Cor:</label>
+                    <input type="text" id="corInput" class="input-field" name="cor">
+
+                    <label for="anoInput">Ano de Fabricação:</label>
+                    <input type="text" id="anoInput" class="input-field" name="ano">
+
+                    <button type="submit" class="button-entrar">Adicionar Carro</button>
+                </form>
             </div>
         </div>
     </div>
-    
+
+    <hr>
+
+    <!-- Exibição de Vagas Relacionadas -->
+    <div class="wrapper">
+        <div id="vagasRelacionadas" class="container">
+            <h2>Vagas Relacionadas</h2>
+            <!-- Os cards de vagas relacionadas serão adicionados aqui dinamicamente -->
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
 
 </body>
+
 </html>
