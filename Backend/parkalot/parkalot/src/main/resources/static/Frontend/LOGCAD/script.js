@@ -84,16 +84,16 @@ function salvarUsuario() {
                             alert("E-mail já cadastrado");
                             return false;
                         } else {
-                            return $$.ajax({
+                            return $.ajax({
                                 method: "POST",
                                 url: "salvar",
                                 data: JSON.stringify({
-                                    nome: client_name,
+                                    name: client_name,
                                     cpf: client_cpf,
                                     email: client_mail,
-                                    telefone: client_phone,
-                                    dataDeNascimento: client_age,
-                                    sexo: client_sex
+                                    phone: client_phone,
+                                    age: idade,
+                                    sex: client_sex
                                 }),
                                 contentType: "application/json; charset=utf-8",
                                 success: function (response) {
