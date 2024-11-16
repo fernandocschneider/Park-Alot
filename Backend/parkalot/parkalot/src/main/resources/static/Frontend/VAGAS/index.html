@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Veículo</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -40,7 +41,7 @@
         <div class="container">
             <div class="card">
                 <h2>Adicionar Novo Carro</h2>
-                <form id="formAdicionarCarro">
+                <form id="formAdicionarCarro" onsubmit="event.preventDefault(); criarCarro();">
                     <label for="modeloInput">Modelo:</label>
                     <input type="text" id="modeloInput" class="input-field" name="modelo" required>
 
@@ -64,15 +65,13 @@
 
     <hr>
 
-    <!-- Exibição de Vagas Relacionadas -->
+    <!-- Exibição de todas as vagas -->
     <div class="wrapper">
-        <div id="vagasRelacionadas" class="container">
-            <h2>Vagas Relacionadas</h2>
-            <!-- Os cards de vagas relacionadas serão adicionados aqui dinamicamente -->
+        <div id="todasVagas" class="container">
+            <h2>Todas as Vagas</h2>
+            <!-- As vagas serão adicionadas aqui dinamicamente -->
         </div>
     </div>
-
-    <script src="script.js" defer></script>
 
 </body>
 

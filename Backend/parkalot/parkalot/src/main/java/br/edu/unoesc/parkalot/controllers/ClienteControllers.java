@@ -132,17 +132,24 @@ public class ClienteControllers {
     @PostMapping(value = "verificarLogin")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> verificarLogin(@RequestBody Cliente cliente) {
+        // Verifica se o cliente existe no banco com o CPF e email fornecidos
         Optional<Cliente> clienteOptional = clienteRepository.findByCpfAndEmail(cliente.getCpf(), cliente.getEmail());
 
         Map<String, Object> responseMap = new HashMap<>();
-        if (clienteOptional.isPresent()) {
 
+        if (clienteOptional.isPresent()) {
+            // Cliente foi encontrado, recupera as informações
+            Cliente clienteEncontrado = clienteOptional.get();
+
+            // Adiciona o userId (ID do cliente) à resposta
             responseMap.put("status", "success");
+            responseMap.put("userId", clienteEncontrado.getId()); // Inclui o userId na resposta
             responseMap.put("redirectUrl", "http://localhost:8080/Frontend/VAGAS/index.html");
 
+            // Retorna a resposta com status 200 OK
             return ResponseEntity.ok(responseMap);
         } else {
-
+            // Cliente não encontrado, retorna erro de login inválido
             responseMap.put("status", "error");
             responseMap.put("message", "Login inválido. Verifique CPF e/ou email.");
             return ResponseEntity.status(401).body(responseMap);

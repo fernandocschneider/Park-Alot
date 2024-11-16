@@ -1,7 +1,5 @@
 package br.edu.unoesc.parkalot.model;
 
-import java.sql.Time;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -42,7 +40,7 @@ public class Vaga {
      * Tempo máximo permitido para estacionamento na vaga.
      */
     @Column(name = "spot_time", nullable = false)
-    private Time time;
+    private int time;
 
     /**
      * Localização ou descrição do local da vaga.
@@ -66,11 +64,11 @@ public class Vaga {
         this.available = available;
     }
 
-    public Time getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
