@@ -11,13 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-/**
- * Classe que representa uma reserva de vaga para um veículo no estacionamento.
- * A tabela 'reserva' contém informações sobre o status da reserva,
- * a vaga associada e o veículo que fez a reserva.
- * 
- * @author Jean Toral
- */
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "reserva")
@@ -42,8 +35,6 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "client_id", referencedColumnName = "client_id", nullable = false)
     private Cliente cliente;
-
-    // Getters e Setters
 
     public Long getId() {
         return id;

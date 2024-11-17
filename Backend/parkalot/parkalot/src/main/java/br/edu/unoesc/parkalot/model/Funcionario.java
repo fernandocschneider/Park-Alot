@@ -9,66 +9,34 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- * Classe que representa um Funcionário no sistema.
- * Está mapeada na tabela 'funcionario' do banco de dados.
- * Cada funcionário possui um CPF único, além de informações de contato, cargo e
- * salário.
- * 
- * @author Jean Toral
- */
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "funcionario")
 public class Funcionario {
 
-    /**
-     * Identificador único do funcionário.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "worker_id", nullable = false, unique = true)
     private Long id;
 
-    /**
-     * CPF do funcionário. Deve ser único no sistema.
-     */
     @Column(name = "worker_cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
-    /**
-     * Nome completo do funcionário.
-     */
     @Column(name = "worker_name", length = 40, nullable = false)
     private String name;
 
-    /**
-     * Telefone de contato do funcionário.
-     */
     @Column(name = "worker_phone", length = 11, nullable = false)
     private String phone;
 
-    /**
-     * Endereço de e-mail do funcionário. Deve ser único no sistema.
-     */
     @Column(name = "worker_mail", length = 30, nullable = false, unique = true)
     private String email;
 
-    /**
-     * Cargo ou função desempenhada pelo funcionário.
-     */
     @Column(name = "worker_role", length = 30, nullable = false)
     private String role;
 
-    /**
-     * Salário atual do funcionário.
-     */
     @Column(name = "worker_salary", nullable = false)
     private Double salary;
 
-    /**
-     * Ano de admissão do funcionário.
-     */
     @Column(name = "worker_admission", nullable = false)
     private Integer admission;
 

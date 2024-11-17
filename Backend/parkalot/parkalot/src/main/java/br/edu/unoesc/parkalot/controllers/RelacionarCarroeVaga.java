@@ -16,9 +16,6 @@ import br.edu.unoesc.parkalot.repository.reservaRepository;
 import br.edu.unoesc.parkalot.repository.vagaRepository;
 import br.edu.unoesc.parkalot.repository.veiculoRepository;
 
-/**
- * Controller para associar um veículo a uma vaga.
- */
 @RestController
 public class RelacionarCarroeVaga {
     @Autowired
@@ -30,12 +27,6 @@ public class RelacionarCarroeVaga {
     @Autowired
     private reservaRepository reservaRepository;
 
-    /**
-     * Associa um carro a uma vaga, criando uma reserva e tornando a vaga indisponível.
-     * 
-     * @param dados Objeto com os IDs do carro e da vaga.
-     * @return ResponseEntity com status de criação ou erro.
-     */
     @PostMapping(value = "relacionarCarroVaga")
     public ResponseEntity<?> relacionarCarroVaga(@RequestBody Map<String, Long> dados) {
         Long carroId = dados.get("carroId");
@@ -52,17 +43,14 @@ public class RelacionarCarroeVaga {
             return new ResponseEntity<String>("Vaga já ocupada", HttpStatus.CONFLICT);
         }
 
-        // Criar a reserva
         Reserva reserva = new Reserva();
         reserva.setVeiculo(veiculo);
         reserva.setSpot(vaga);
         reserva.setStatus("Reservada");
 
-        // Tornar a vaga indisponível
         vaga.setAvailable(false);
         vagaRepository.save(vaga);
 
-        // Salvar a reserva
         reservaRepository.save(reserva);
 
         return new ResponseEntity<Reserva>(reserva, HttpStatus.CREATED);

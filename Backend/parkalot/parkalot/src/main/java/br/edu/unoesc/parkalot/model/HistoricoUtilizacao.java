@@ -15,52 +15,28 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-/**
- * Classe que representa o histórico de utilização de uma vaga de
- * estacionamento.
- * A tabela 'historico_utilizacao' mantém o registro da entrada e saída de
- * veículos
- * nas vagas do sistema.
- * 
- * @author Jean Toral
- */
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "historico_utilizacao")
 public class HistoricoUtilizacao {
 
-    /**
-     * Identificador único do histórico de utilização.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "history_id", nullable = false, unique = true)
     private Long id;
 
-    /**
-     * Data de entrada do veículo na vaga.
-     */
     @Column(name = "history_entry_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date entryDate;
 
-    /**
-     * Data de saída do veículo da vaga.
-     */
     @Column(name = "history_leave_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date leaveDate;
 
-    /**
-     * Vaga de estacionamento que foi utilizada.
-     */
     @OneToOne
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     private Vaga spot;
 
-    /**
-     * Veículo que utilizou a vaga.
-     */
     @OneToOne
     @JoinColumn(name = "veicule_sign", referencedColumnName = "veicule_sign", nullable = false)
     private Veiculo veiculo;

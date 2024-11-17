@@ -11,54 +11,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-/**
- * Classe que representa o Endereço de um Cliente no sistema.
- * Está mapeada na tabela 'endereco' do banco de dados e possui uma relação de
- * um-para-um com a entidade Cliente.
- * 
- * @author Jean Toral
- */
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "endereco")
 public class Endereco {
 
-    /**
-     * Identificador único do endereço.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "adress_number", nullable = false, unique = true)
     private Long id;
 
-    /**
-     * Nome da rua do endereço.
-     */
     @Column(name = "adress_street", length = 30, nullable = false)
     private String street;
 
-    /**
-     * Bairro do endereço.
-     */
     @Column(name = "adress_neighbor", length = 30, nullable = false)
     private String neighbor;
 
-    /**
-     * Complemento do endereço (opcional).
-     */
     @Column(name = "adress_extra", length = 30)
     private String extra;
 
-    /**
-     * Cidade onde o endereço está localizado.
-     */
     @Column(name = "adress_city", length = 40, nullable = false)
     private String city;
 
-    /**
-     * Cliente associado ao endereço.
-     * Relação de um-para-um entre Endereço e Cliente.
-     */
     @OneToOne
     @JoinColumn(name = "client_cpf", referencedColumnName = "client_cpf", nullable = false)
     private Cliente client;

@@ -16,17 +16,14 @@ function logarUsuario() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Dados recebidos do servidor:', data); // Verifique o conteúdo da resposta
+            console.log('Dados recebidos do servidor:', data);
 
-            // Certifique-se de que o 'userId' está sendo retornado corretamente
             if (data.userId) {
-                console.log('userId recebido:', data.userId); // Verificando se o userId está presente
+                console.log('userId recebido:', data.userId);
 
-                // Armazena o userId no localStorage
                 localStorage.setItem('userId', data.userId);
                 localStorage.setItem('cpf', cpf);
 
-                // Redireciona o usuário para a página correta
                 window.location.replace(data.redirectUrl);
             } else {
                 alert(data.message || "Login inválido. userId não recebido.");
