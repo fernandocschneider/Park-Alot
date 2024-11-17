@@ -1,5 +1,7 @@
 package br.edu.unoesc.parkalot.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -10,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -24,17 +27,11 @@ import jakarta.persistence.Table;
 @Table(name = "veiculo")
 public class Veiculo {
 
-    /**
-     * Identificador único do veículo.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "veiculo_id", nullable = false, unique = true)
     private Long id;
 
-    /**
-     * Placa do veículo.
-     */
     @Column(name = "veicule_sign", length = 8, nullable = false, unique = true)
     private String plate;
 
@@ -69,6 +66,9 @@ public class Veiculo {
     @JoinColumn(name = "client_id", referencedColumnName = "client_id", nullable = false)
     @JsonIgnoreProperties({ "id", "name", "phone", "email", "age", "sex", "veiculos" })
     private Cliente owner;
+
+    @OneToMany(mappedBy = "veiculo")
+    private List<Reserva> reservas; // Relacionamento com a tabela Reserva
 
     public Long getId() {
         return id;

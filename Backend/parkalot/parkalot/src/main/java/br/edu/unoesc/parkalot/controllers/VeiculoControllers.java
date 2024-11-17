@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unoesc.parkalot.model.Cliente;
 import br.edu.unoesc.parkalot.model.Veiculo;
-import br.edu.unoesc.parkalot.repository.clienteRepository;
 
 /**
  * Controller responsável pelo gerenciamento dos veículos.

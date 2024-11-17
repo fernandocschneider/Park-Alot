@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -23,33 +23,27 @@ import jakarta.persistence.Table;
 @Table(name = "reserva")
 public class Reserva {
 
-    /**
-     * Identificador único da reserva.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "booking_id", nullable = false, unique = true)
     private Long id;
 
-    /**
-     * Status da reserva (ex: "confirmada", "pendente", "finalizada").
-     */
     @Column(name = "booking_status", length = 20, nullable = false)
     private String status;
 
-    /**
-     * A vaga associada à reserva.
-     */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", nullable = false)
     private Vaga spot;
 
-    /**
-     * O veículo que fez a reserva.
-     */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "veicule_sign", referencedColumnName = "veicule_sign", nullable = false)
     private Veiculo veiculo;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", referencedColumnName = "client_id", nullable = false)
+    private Cliente cliente;
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -83,11 +77,18 @@ public class Reserva {
         this.veiculo = veiculo;
     }
 
-    @Override
-    public String toString() {
-        return "Reserva [id=" + id + ", initialDate=" +
-                ", status=" + status + ", spot=" + spot +
-                ", veiculo=" + veiculo + "]";
+    public Cliente getCliente() {
+        return cliente;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "Reserva [id=" + id + ", status=" + status +
+                ", spot=" + spot + ", veiculo=" + veiculo +
+                ", cliente=" + cliente + "]";
+    }
 }

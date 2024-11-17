@@ -46,80 +46,7 @@ function listarCarros() {
                 carroSelect.appendChild(option);
             });
         })
-        .catch(error => {
-            console.error('Erro ao carregar carros:', error);
-            alert('Erro ao carregar a lista de carros. Por favor, tente novamente.');
-        });
 }
-
-// // Função para listar vagas, com base na autenticação ou não
-// function listarVagas() {
-//     console.log('Buscando vagas...');  // Verificando a chamada da função
-
-//     const cpf = localStorage.getItem('cpf');  // Recupera o CPF do localStorage
-//     let url = `${apiUrl}/listaVagas`; // Endpoint para obter todas as vagas
-
-//     // Se o CPF estiver no localStorage, incluir como filtro
-//     if (cpf) {
-//         url += `?cpf=${cpf}`;
-//     }
-
-//     fetch(url)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Falha na requisição para listar vagas.');
-//             }
-//             return response.json();
-//         })
-//         .then(vagas => {
-//             console.log('Vagas recebidas:', vagas);  // Verifique a resposta da API
-//             const vagaSelect = document.getElementById('vagaSelect');
-//             vagaSelect.innerHTML = '<option value="">Selecione uma vaga</option>';
-//             vagas.forEach(vaga => {
-//                 const option = document.createElement('option');
-//                 option.value = vaga.id;
-//                 option.textContent = `${vaga.local}`;
-//                 vagaSelect.appendChild(option);
-//             });
-//         })
-//         .catch(error => {
-//             console.error('Erro ao carregar vagas:', error);
-//             alert('Erro ao carregar a lista de vagas. Por favor, tente novamente.');
-//         });
-// }
-
-// Função para listar todas as reservas feitas
-// function listarReservas() {
-//     console.log('Buscando todas as reservas...');
-
-//     fetch(`${apiUrl}/listaReservas`)  // Endpoint para listar todas as reservas
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Falha na requisição para listar reservas.');
-//             }
-//             return response.json();
-//         })
-//         .then(reservas => {
-//             console.log('Reservas recebidas:', reservas);
-//             const reservasContainer = document.getElementById('reservasContainer');
-//             reservasContainer.innerHTML = '<h2>Reservas</h2>';
-
-//             reservas.forEach(reserva => {
-//                 const reservaCard = document.createElement('div');
-//                 reservaCard.classList.add('card');
-//                 reservaCard.innerHTML = `
-//                     <div class="card-title">${reserva.veiculo.model} - ${reserva.veiculo.plate}</div>
-//                     <p><strong>Vaga:</strong> ${reserva.spot.localizacao}</p>
-//                     <p><strong>Status:</strong> ${reserva.status}</p>
-//                 `;
-//                 reservasContainer.appendChild(reservaCard);
-//             });
-//         })
-//         .catch(error => {
-//             console.error('Erro ao carregar reservas:', error);
-//             alert('Erro ao carregar as reservas. Por favor, tente novamente.');
-//         });
-// }
 
 // Função para logar o usuário
 function logarUsuario() {
@@ -156,10 +83,6 @@ function logarUsuario() {
                 alert(data.message || "Login inválido.");
             }
         })
-        .catch(error => {
-            console.error('Erro no login:', error);
-            alert('Erro ao tentar fazer login.');
-        });
 }
 
 // Evento de carregamento da página
@@ -170,12 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Usuário autenticado, carregando dados da página...');
         listarCarros();  // Carrega os carros do usuário logado
         listarVagas();   // Carrega as vagas do usuário ou todas as vagas
-        listarReservas(); // Carrega as reservas do usuário
+        listarReservas(); // Carrega as reservas do usuário logado
     } else {
         console.log('Usuário não autenticado, solicitando login...');
         // Exibe o formulário de login ou redireciona o usuário para a página de login
     }
 });
+
 
 // Função para criar um novo carro
 function criarCarro() {
@@ -233,8 +157,176 @@ function criarCarro() {
             // Limpar campos do formulário após sucesso
             document.getElementById('formAdicionarCarro').reset();
         })
-        .catch(error => {
-            console.error('Erro ao criar o carro:', error);
-            alert('Erro ao tentar criar o carro. Por favor, tente novamente.');
-        });
 }
+
+function listarVagas() {
+    console.log('Buscando vagas disponíveis...');
+
+    // Atualizando a URL para chamar o endpoint de vagas disponíveis
+    const url = `${apiUrl}/disponiveis`; // Endpoint que retorna apenas as vagas disponíveis
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Falha ao carregar as vagas');
+            }
+
+            // Verificar se o corpo da resposta está vazio
+            if (response.status === 204) {
+                console.log('Nenhuma vaga disponível');
+                return []; // Retorna um array vazio
+            }
+
+            // Se a resposta for válida, tenta converter para JSON
+            return response.json();
+        })
+        .then(vagas => {
+            const vagaSelect = document.getElementById('vagaSelect');
+            vagaSelect.innerHTML = '<option value="">Selecione uma vaga disponível</option>';
+
+            if (vagas.length === 0) {
+                console.log('Nenhuma vaga disponível');
+                vagaSelect.innerHTML = '<option value="">Não há vagas disponíveis no momento</option>';
+                return; // Não mostramos erro, apenas uma mensagem
+            }
+
+            vagas.forEach(vaga => {
+                const option = document.createElement('option');
+                option.value = vaga.id;
+                option.textContent = `${vaga.local}`;  // Exibe a localização da vaga
+                vagaSelect.appendChild(option);
+            });
+        })
+}
+
+function reservarVaga() {
+    const spotId = document.getElementById('vagaSelect').value;
+    const carroSelect = document.getElementById('carroSelect');
+    const selectedOption = carroSelect.options[carroSelect.selectedIndex];
+
+    const userId = localStorage.getItem('userId');  // Recupere o clientId armazenado no localStorage
+
+    // Verificação para garantir que todos os campos foram preenchidos
+    if (!spotId || !selectedOption || !userId) {
+        alert('Por favor, selecione uma vaga, um carro e verifique o ID do cliente!');
+        return;
+    }
+
+    const carInfo = selectedOption.textContent;
+    const plate = carInfo.split('-')[1].trim();  // Extrai a placa do carro
+
+    // Verifica se o userId está disponível
+    if (!userId) {
+        alert('Erro: ID do cliente não encontrado');
+        return;
+    }
+
+    // Construir a URL com todos os parâmetros necessários
+    const url = new URL(`${apiUrl}/reservarVaga`);
+    url.searchParams.append('spotId', spotId);
+    url.searchParams.append('plate', plate);
+    url.searchParams.append('clientId', userId);  // Passando o clientId correto
+
+    console.log("URL gerada para reserva: ", url.toString());  // Verifique no console se a URL está correta
+
+    // Enviar a requisição para o backend
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => {
+                    throw new Error(`Erro ${response.status}: ${text || 'Erro ao realizar a reserva'}`);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('Reserva realizada com sucesso!');
+            listarVagas(); // Atualiza a lista de vagas disponíveis
+            listarReservas(); // Atualiza as reservas do usuário
+        })
+}
+
+function listarReservas() {
+    const userId = localStorage.getItem('userId');  // Recupera o ID do usuário do localStorage
+
+    if (!userId) {
+        console.log('Usuário não autenticado!');
+        return;
+    }
+
+    console.log('Buscando reservas para o usuário:', userId);
+
+    fetch(`${apiUrl}/listaReservasCliente?userId=${userId}`)  // Certifique-se de que o nome do parâmetro esteja correto
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Falha ao carregar reservas');
+            }
+            return response.json();
+        })
+        .then(reservasData => {
+            console.log('Reservas recebidas:', reservasData);
+
+            const reservasContainer = document.getElementById('reservasContainer');
+            reservasContainer.innerHTML = '';  // Limpa o conteúdo anterior
+
+            if (reservasData.length === 0) {
+                reservasContainer.innerHTML = '<p>Você ainda não tem reservas.</p>';
+                return;
+            }
+
+            reservasData.forEach(reserva => {
+                const reservaCard = document.createElement('div');
+                reservaCard.classList.add('reserva-card');  // Adiciona a classe do card
+
+                // Criando a seção de informações da reserva
+                const reservaInfo = document.createElement('div');
+                reservaInfo.classList.add('reserva-info');
+
+                const carroInfo = document.createElement('h3');
+                carroInfo.textContent = `Carro: ${reserva.veiculo.model} - ${reserva.veiculo.plate}`;
+                reservaInfo.appendChild(carroInfo);
+
+                const vagaInfo = document.createElement('p');
+                vagaInfo.innerHTML = `Vaga: <strong>${reserva.spot.local}</strong>`;
+                reservaInfo.appendChild(vagaInfo);
+
+                reservaCard.appendChild(reservaInfo);
+
+                // Criando o botão de exclusão
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Excluir Reserva';
+                deleteButton.classList.add('delete-button');
+                deleteButton.onclick = () => excluirReserva(reserva.id);  // Chama a função para excluir a reserva
+                reservaCard.appendChild(deleteButton);
+
+                // Adiciona o card de reserva ao container de reservas
+                reservasContainer.appendChild(reservaCard);
+            });
+        })
+}
+
+function excluirReserva(reservaId) {
+    const confirmDelete = confirm('Tem certeza que deseja excluir essa reserva?');
+    if (!confirmDelete) return;
+
+    // Envia o parâmetro 'booking_id' como query na URL
+    fetch(`${apiUrl}/excluirReserva?booking_id=${reservaId}`, {
+        method: 'DELETE',
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao excluir a reserva');
+            }
+            alert('Reserva excluída com sucesso');
+            listarReservas(); // Atualiza a lista de reservas
+            listarVagas();
+        })
+}
+
+
+

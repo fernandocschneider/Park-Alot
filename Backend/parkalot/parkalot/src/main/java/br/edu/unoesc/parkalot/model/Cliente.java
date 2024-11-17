@@ -26,9 +26,6 @@ import jakarta.persistence.Table;
 @Table(name = "cliente")
 public class Cliente {
 
-    /**
-     * Identificador único do cliente.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "client_id", nullable = false, unique = true)
@@ -73,8 +70,10 @@ public class Cliente {
     /**
      * Lista de veículos associados ao cliente.
      */
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reserva> reservas;
+
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({ "id", "brand", "owner" })
     private List<Veiculo> veiculos;
 
     public Long getId() {

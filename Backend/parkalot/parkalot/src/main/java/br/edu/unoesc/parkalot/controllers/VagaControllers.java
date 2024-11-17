@@ -49,4 +49,19 @@ public class VagaControllers {
         boolean isReserved = vagaRepository.verificarReserva(idVaga, initialDate, finalDate);
         return new ResponseEntity<>(isReserved, HttpStatus.OK);
     }
+
+    @GetMapping("/disponiveis")
+    public ResponseEntity<List<Vaga>> listarVagasDisponiveis() {
+        // Utiliza o método do repositório para buscar vagas disponíveis (available =
+        // true)
+        List<Vaga> vagasDisponiveis = vagaRepository.findByAvailable(true);
+
+        // Verifica se a lista de vagas disponíveis está vazia
+        if (vagasDisponiveis.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna status 204 se não houver vagas disponíveis
+        }
+
+        // Retorna a lista de vagas disponíveis com status 200 (OK)
+        return ResponseEntity.ok(vagasDisponiveis);
+    }
 }

@@ -32,7 +32,7 @@
                         <option value="">Selecione uma vaga</option>
                     </select>
 
-                    <button type="submit" class="button-entrar">Relacionar</button>
+                    <button type="submit" class="button-entrar" onclick="reservarVaga()">Relacionar</button>
                 </form>
             </div>
         </div>
@@ -65,13 +65,15 @@
 
     <hr>
 
-    <!-- Exibição de todas as vagas -->
-    <div class="wrapper">
-        <div id="todasVagas" class="container">
-            <h2>Todas as Vagas</h2>
-            <!-- As vagas serão adicionadas aqui dinamicamente -->
-        </div>
+    <div id="todasVagas">
+        <h3>Todas as vagas</h3>
+        <!-- Aqui você pode listar as vagas disponíveis -->
     </div>
+
+    <div id="reservasContainer">
+        <!-- As reservas serão exibidas aqui -->
+    </div>
+
 
 </body>
 
