@@ -29,7 +29,7 @@ public class Veiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "veiculo_id", nullable = false, unique = true)
+    @Column(name = "veicule_id", nullable = false, unique = true)
     private Long id;
 
     @Column(name = "veicule_sign", length = 8, nullable = false, unique = true)
