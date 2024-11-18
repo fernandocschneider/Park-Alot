@@ -8,18 +8,18 @@ BEGIN
     DECLARE action_type VARCHAR(50);
 
     -- Determinar o tipo de ação (INSERT, UPDATE ou DELETE)
-    IF (NEW.reser_id IS NOT NULL AND OLD.reser_id IS NULL) THEN
+    IF (NEW.booking_id IS NOT NULL AND OLD.booking_id IS NULL) THEN
         SET action_type = 'INSERT';
-    ELSEIF (NEW.reser_id IS NOT NULL AND OLD.reser_id IS NOT NULL) THEN
+    ELSEIF (NEW.booking_id IS NOT NULL AND OLD.booking_id IS NOT NULL) THEN
         SET action_type = 'UPDATE';
-    ELSEIF (NEW.reser_id IS NULL AND OLD.reser_id IS NOT NULL) THEN
+    ELSEIF (NEW.booking_id IS NULL AND OLD.booking_id IS NOT NULL) THEN
         SET action_type = 'DELETE';
     END IF;
 
     -- Inserir o registro de auditoria na tabela AuditLog
     INSERT INTO AuditLog (table_name, operation_type, operation_date, user_name, old_value, new_value)
     VALUES ('Reserva', action_type, NOW(), USER(), 
-            IFNULL(OLD.reser_id, 'N/A'), IFNULL(NEW.reser_id, 'N/A'));
+            IFNULL(OLD.booking_id, 'N/A'), IFNULL(NEW.booking_id, 'N/A'));
 END;
 
 DELIMITER ;
@@ -35,7 +35,7 @@ BEFORE INSERT ON Veiculo
 FOR EACH ROW
 BEGIN
     -- Verificar se a placa já existe na tabela de Veiculos
-    IF EXISTS (SELECT 1 FROM Veiculo WHERE veic_placa = NEW.veic_placa) THEN
+    IF EXISTS (SELECT 1 FROM Veiculo WHERE veicule_plate = NEW.veicule_plate) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Erro: Placa do veículo já cadastrada.';
     END IF;
 END;
