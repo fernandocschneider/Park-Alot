@@ -1,6 +1,5 @@
 package br.edu.unoesc.parkalot.repository;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,12 +30,8 @@ public interface vagaRepository extends JpaRepository<Vaga, Long> {
          */
         @Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END " +
                         "FROM Reserva r " +
-                        "WHERE r.spot.id = :idVaga " +
-                        "AND r.entryDate <= :finalDate " +
-                        "AND r.leaveDate >= :initialDate")
-        boolean verificarReserva(@Param("idVaga") Long idVaga,
-                        @Param("initialDate") Date initialDate,
-                        @Param("finalDate") Date finalDate);
+                        "WHERE r.spot.id = :idVaga ")
+        boolean verificarReserva(@Param("idVaga") Long idVaga);
 
         /**
          * Encontra todas as vagas com um status de disponibilidade especificado.

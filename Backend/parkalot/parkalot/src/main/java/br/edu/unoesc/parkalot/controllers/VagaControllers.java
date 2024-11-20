@@ -1,6 +1,5 @@
 package br.edu.unoesc.parkalot.controllers;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +46,8 @@ public class VagaControllers {
      */
     @GetMapping(value = "verificarReserva")
     public ResponseEntity<Boolean> verificarReserva(
-            @RequestParam Long idVaga,
-            @RequestParam Date initialDate,
-            @RequestParam Date finalDate) {
-        boolean isReserved = vagaRepository.verificarReserva(idVaga, initialDate, finalDate);
+            @RequestParam Long idVaga) {
+        boolean isReserved = vagaRepository.verificarReserva(idVaga);
         return new ResponseEntity<>(isReserved, HttpStatus.OK);
     }
 

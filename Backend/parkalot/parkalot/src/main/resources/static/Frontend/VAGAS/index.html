@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <!-- Cabeçalho -->
     <header class="header">
@@ -19,39 +21,30 @@
         <div class="container">
             <div class="card">
                 <h2>Escolha o Carro e a Vaga</h2>
-                <form id="formRelacionarCarroVaga" onsubmit="event.preventDefault(); reservarVaga();">
+                <form id="formRelacionarCarroVaga" onsubmit="event.preventDefault();">
                     <label for="carroSelect">Carro:</label>
                     <select id="carroSelect" class="input-field" required>
                         <option value="">Selecione um carro</option>
                     </select>
-    
+
                     <label for="vagaSelect">Local da Vaga:</label>
                     <select id="vagaSelect" class="input-field" required>
                         <option value="">Selecione o local</option>
                     </select>
-                    <button type="button" class="button-entrar" onclick="toggleAddCarCard()">Adicionar Novo Carro</button>
+                    <button type="button" class="button-entrar" onclick="toggleAddCarCard()">Adicionar Novo
+                        Carro</button>
+                    <button type="submit" class="button-entrar" onclick="reservarVaga()">Relacionar</button>
                 </form>
             </div>
         </div>
 
         <!-- Seção "Todas as Vagas" -->
         <div id="todasVagas" class="container">
-            <h1>Vagas</h1>
-            <div class="vaga-card vaga-disponivel" title="Vaga disponível">1</div>
-            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">2</div>
-            <div class="vaga-card vaga-disponivel" title="Vaga disponível">3</div>
-            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">4</div>
-            <div class="vaga-card vaga-disponivel" title="Vaga disponível">5</div>
-            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">6</div>
-            <div class="vaga-card vaga-disponivel" title="Vaga disponível">7</div>
-            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">8</div>
-            <div class="vaga-card vaga-disponivel" title="Vaga disponível">9</div>
-            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">10</div>
-
-            <!-- Botão Relacionar -->
-            <button id="relacionarButton" type="button">Reservar vaga</button>
+            <div id="reservasContainer">
+                <!-- As reservas serão exibidas aqui -->
+            </div>
         </div>
-        
+
     </div>
 
     <!-- Formulário para adicionar um novo carro (card flutuante) -->
@@ -78,10 +71,6 @@
         </form>
     </div>
     <hr />
-    <!-- Formulário para adicionar uma nova vaga (card flutuante) -->
-    <!-- Div para exibir reservas -->
-    <div id="reservasContainer">
-        <!-- As reservas serão exibidas aqui -->
-    </div>
 </body>
+
 </html>
