@@ -1,80 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Veículo</title>
+    <title>Relacionar Carro e Vaga</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
-
 <body>
-
-    <div class="header">
+    <!-- Cabeçalho -->
+    <header class="header">
         <h1>Relacionar Carro e Vaga</h1>
-    </div>
+    </header>
 
-    <!-- Container flex para colocar os dois formulários lado a lado -->
+    <!-- Contêiner flexível principal -->
     <div class="flex-container">
-        <!-- Formulário para selecionar o carro e a vaga -->
+        <!-- Card de seleção -->
         <div class="container">
             <div class="card">
                 <h2>Escolha o Carro e a Vaga</h2>
-                <form id="formRelacionarCarroVaga">
+                <form id="formRelacionarCarroVaga" onsubmit="event.preventDefault(); reservarVaga();">
                     <label for="carroSelect">Carro:</label>
                     <select id="carroSelect" class="input-field" required>
                         <option value="">Selecione um carro</option>
                     </select>
-
-                    <label for="vagaSelect">Vaga:</label>
+    
+                    <label for="vagaSelect">Local da Vaga:</label>
                     <select id="vagaSelect" class="input-field" required>
-                        <option value="">Selecione uma vaga</option>
+                        <option value="">Selecione o local</option>
                     </select>
-
-                    <button type="submit" class="button-entrar" onclick="reservarVaga()">Relacionar</button>
+                    <button type="button" class="button-entrar" onclick="toggleAddCarCard()">Adicionar Novo Carro</button>
                 </form>
             </div>
         </div>
 
-        <!-- Formulário para adicionar um novo carro -->
-        <div class="container">
-            <div class="card">
-                <h2>Adicionar Novo Carro</h2>
-                <form id="formAdicionarCarro" onsubmit="event.preventDefault(); criarCarro();">
-                    <label for="modeloInput">Modelo:</label>
-                    <input type="text" id="modeloInput" class="input-field" name="modelo" required>
+        <!-- Seção "Todas as Vagas" -->
+        <div id="todasVagas" class="container">
+            <h1>Vagas</h1>
+            <div class="vaga-card vaga-disponivel" title="Vaga disponível">1</div>
+            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">2</div>
+            <div class="vaga-card vaga-disponivel" title="Vaga disponível">3</div>
+            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">4</div>
+            <div class="vaga-card vaga-disponivel" title="Vaga disponível">5</div>
+            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">6</div>
+            <div class="vaga-card vaga-disponivel" title="Vaga disponível">7</div>
+            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">8</div>
+            <div class="vaga-card vaga-disponivel" title="Vaga disponível">9</div>
+            <div class="vaga-card vaga-indisponivel" title="Vaga indisponível">10</div>
 
-                    <label for="marcaInput">Marca:</label>
-                    <input type="text" id="marcaInput" class="input-field" name="marca" required>
-
-                    <label for="placaInput">Placa:</label>
-                    <input type="text" id="placaInput" class="input-field" name="placa" required>
-
-                    <label for="corInput">Cor:</label>
-                    <input type="text" id="corInput" class="input-field" name="cor">
-
-                    <label for="anoInput">Ano de Fabricação:</label>
-                    <input type="text" id="anoInput" class="input-field" name="ano">
-
-                    <button type="submit" class="button-entrar">Adicionar Carro</button>
-                </form>
-            </div>
+            <!-- Botão Relacionar -->
+            <button id="relacionarButton" type="button">Reservar vaga</button>
         </div>
+        
     </div>
 
-    <hr>
+    <!-- Formulário para adicionar um novo carro (card flutuante) -->
+    <div id="cardAdicionarNovoCarro" class="card card-flutuante">
+        <h2>Adicionar Novo Carro</h2>
+        <form id="formAdicionarCarro" onsubmit="event.preventDefault(); criarCarro();">
+            <label for="modeloInput">Modelo:</label>
+            <input type="text" id="modeloInput" class="input-field" name="modelo" required>
 
-    <div id="todasVagas">
-        <h3>Todas as vagas</h3>
-        <!-- Aqui você pode listar as vagas disponíveis -->
+            <label for="marcaInput">Marca:</label>
+            <input type="text" id="marcaInput" class="input-field" name="marca" required>
+
+            <label for="placaInput">Placa:</label>
+            <input type="text" id="placaInput" class="input-field" name="placa" required>
+
+            <label for="corInput">Cor:</label>
+            <input type="text" id="corInput" class="input-field" name="cor" required>
+
+            <label for="anoInput">Ano de Fabricação:</label>
+            <input type="text" id="anoInput" class="input-field" name="ano" required>
+
+            <button type="submit" class="button-entrar">Adicionar Carro</button>
+            <button type="button" class="button-entrar" onclick="toggleAddCarCard()">Fechar</button>
+        </form>
     </div>
-
+    <hr />
+    <!-- Formulário para adicionar uma nova vaga (card flutuante) -->
+    <!-- Div para exibir reservas -->
     <div id="reservasContainer">
         <!-- As reservas serão exibidas aqui -->
     </div>
-
-
 </body>
-
 </html>
